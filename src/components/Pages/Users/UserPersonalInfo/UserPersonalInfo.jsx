@@ -9,9 +9,13 @@ import UserImage from "./UserImage";
 const UserPersonalInfo = () => {
   return (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 gap-5">
-        <UserImage />
-        <UserDetailsRight />
+      <div className="grid grid-cols-12 gap-5">
+        <div className="col-span-3">
+          <UserImage />
+        </div>
+        <div className="col-span-9">
+          <UserDetailsRight />
+        </div>
       </div>
       <div className="flex flex-col gap-5">
         <UserOrders />

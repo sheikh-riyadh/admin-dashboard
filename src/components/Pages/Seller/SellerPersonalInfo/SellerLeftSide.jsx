@@ -1,13 +1,15 @@
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import CommonComponent from "../../../Common/CommonComponent";
 import Button from "../../../Common/Button";
 
-const UserDetailsRight = ({ data }) => {
+const SellerLeftSide = ({ data }) => {
   const navigate = useNavigate();
+  const user = data?.[0];
+
   return (
-    <div className="shadow-md rounded-md border overflow-hidden">
-      <div className="flex justify-between border-b bg-white p-4">
+    <div className="shadow-md rounded-md overflow-hidden border">
+      <div className="flex justify-between bg-white p-5 border-b">
         <div>
           <h2 className="capitalize text-2xl font-semibold text-gray-800 ">
             Personal Info
@@ -16,7 +18,6 @@ const UserDetailsRight = ({ data }) => {
         <div>
           <Button
             onClick={() => navigate(-1)}
-            type="button"
             className="px-5"
           >
             Back
@@ -28,22 +29,22 @@ const UserDetailsRight = ({ data }) => {
           <div className="w-full rounded-md">
             <CommonComponent
               name={"Full Name"}
-              value={data?.firstName + " " + data?.lastName}
+              value={user?.firstName + " " + user?.lastName}
             />
-            <CommonComponent name={"Phone"} value={data?.phone} />
-            <CommonComponent name={"Role"} value={data?.role} />
+            <CommonComponent name={"Phone"} value={user?.phone} />
+            <CommonComponent name={"Role"} value={user?.role} />
           </div>
           <div className="w-full rounded-md">
             <CommonComponent
               name={"Phone Verified"}
-              value={data?.phoneNumberVerified ? "Verified" : "Not Verified"}
+              value={user?.phoneNumberVerified ? "Verified" : "Not Verified"}
             />
             <CommonComponent
               name={"Email Verified"}
-              value={data?.emailVerified ? "Verified" : "Not Verified"}
+              value={user?.emailVerified ? "Verified" : "Not Verified"}
             />
 
-            <CommonComponent name={"Status"} value={data?.status} />
+            <CommonComponent name={"User Status"} value={user?.status} />
           </div>
         </div>
       </div>
@@ -51,8 +52,8 @@ const UserDetailsRight = ({ data }) => {
   );
 };
 
-UserDetailsRight.propTypes = {
+SellerLeftSide.propTypes = {
   data: PropTypes.object,
 };
 
-export default UserDetailsRight;
+export default SellerLeftSide;

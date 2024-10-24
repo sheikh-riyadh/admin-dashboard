@@ -36,7 +36,7 @@ const Table = ({ columns, tableData, className }) => {
               {columns?.map((column, index) => (
                 <td
                   key={index}
-                  className="p-4 border-t border-t-blue-gray-100 dark:border-t-blue-gray-100/40"
+                  className="p-4 border-t"
                 >
                   {column?.render ? (
                     <column.render item={item} />

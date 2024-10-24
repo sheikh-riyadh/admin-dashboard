@@ -21,7 +21,7 @@ const UsersTable = () => {
   };
 
   return (
-    <div className="border rounded-md shadow-md">
+    <div className="">
       <Table
         className="font-normal"
         tableData={users.allUser}

@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import { FaUserCircle } from "react-icons/fa";
-const UserImage = ({ data }) => {
+const SellerImage = ({ data }) => {
   return (
     <div className="p-7 w-full h-full bg-white border shadow-md rounded-md flex items-center justify-center">
       {data ? (
         <img
-          className="h-44 w-44 rounded-full border"
+          className="h-44 w-44 border rounded-full"
           src=""
           alt="user_photo"
         />
       ) : (
-        <div className="h-full w-full flex flex-col justify-center items-center">
+        <div className="h-full w-full flex flex-col items-center justify-center">
           <FaUserCircle className="w-44 h-44 rounded-full border p-5 border-stech" />
         </div>
       )}
@@ -18,7 +18,7 @@ const UserImage = ({ data }) => {
   );
 };
 
-UserImage.propTypes = {
+SellerImage.propTypes = {
   data: PropTypes.object,
 };
-export default UserImage;
+export default SellerImage;

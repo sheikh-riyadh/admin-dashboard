@@ -31,9 +31,9 @@ export const layout = {
       link: "/block-users",
     },
     {
-      name: "Seller",
+      name: "Sellers",
       icon: <FaShop />,
-      link: "/seller",
+      link: "/sellers",
     },
     {
       name: "Block Seller",
