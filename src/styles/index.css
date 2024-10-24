@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .my_container {
+    @apply px-4  sm:px-7 md:max-w-full md:px-[15px] lg:px-[15px] xl:px-[30px] 2xl:max-w-[1372px] 2xl:px-0 sm:max-w-xl mx-auto;
+  }
+}
+
+/* Number input arrow button hide */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Handle */
+
+
+/* Track */
+.custom-bar::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.custom-bar::-webkit-scrollbar-thumb {
+  background: var(--stech);
+}
+.custom-bar::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Here we hide scrollbar */
+.bar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Apply the zoom-in animation to an element */
+.zoom-in-element {
+  
+  animation: zoomIn 0.5s ease forwards;
+}
+
+.rtl-animation {
+  animation: fadeInRight 0.5s ease-in-out;
+}
+
+.ltr-animation {
+  animation: fadeInLeft 0.5s ease forwards;
+}
+
+/* Up and down animation */
+.up-and-down {
+  background-color: var(--primary);
+  border-radius: 50%;
+  position: relative;
+  animation: moveUpDown 2s infinite ease-in-out;
+}
+
+/* Remove number input default arrow sign */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+.circle-progressbar::before{
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: var(--white);
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@keyframes moveUpDown {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--primary);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Zoom-in animation */
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5); /* Start at half size */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1); /* Zoom to full size */
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px); /* Start 100px from the right */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* End at the original position */
+  }
+}
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px); /* Start 100px to the left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* End at the original position */
+  }
+}
+
+/* Default color */
+body {
+  --primary: #ef4a23;
+  --secondary: #1877f2;
+  --success: #198754;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #0dcaf0;
+  --white: #fff;
+  --black: #222325;
+  --slate: #6c757d;
+  --stech: #081621;
+  background-color: #f1f5f9;
+  color: var(--black);
+}
