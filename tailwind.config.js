@@ -16,6 +16,9 @@ export default {
         stech: "var(--stech)",
       },
       my_linear_gradient: `linear-gradient(125deg,#0bc1e9,#3749bb,#00237e)`,
+      backgroundImage: {
+        banner: "url('/src/assets/mountain.png')",
+      },
     },
   },
   plugins: [],

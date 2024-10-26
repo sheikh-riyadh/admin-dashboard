@@ -14,6 +14,8 @@ import AllProducts from "../pages/Products/AllProducts";
 import Feedback from "../pages/Feedback/Feedback";
 import Reported from "../pages/Reported/Reported";
 import Message from "../pages/Message/Message";
+import Login from "../pages/Login/Login";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "send-message",
-        element: <Message/>,
+        element: <Message />,
       },
       {
         path: "orders",
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
         element: <UserView />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+  {
+    path: "login",
+    element: <Login />,
   },
 ]);
 
