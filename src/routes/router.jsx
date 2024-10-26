@@ -9,6 +9,11 @@ import Users from "../pages/Users/Users";
 import UserView from "../components/Pages/Users/UserView/UserView";
 import SellerView from "../components/Pages/Seller/SellerView/SellerView";
 import Sellers from "../pages/Sellers/Sellers";
+import BlockUser from "../pages/BlockUser/BlockUser";
+import AllProducts from "../pages/Products/AllProducts";
+import Feedback from "../pages/Feedback/Feedback";
+import Reported from "../pages/Reported/Reported";
+import Message from "../pages/Message/Message";
 
 const router = createBrowserRouter([
   {
@@ -24,16 +29,40 @@ const router = createBrowserRouter([
         element: <Analytics />,
       },
       {
+        path: "all-products",
+        element: <AllProducts />,
+      },
+      {
         path: "banner-info",
         element: <BannerInformation />,
+      },
+      {
+        path: "block-users",
+        element: <BlockUser />,
+      },
+      {
+        path: "block-seller",
+        element: <BlockUser />,
       },
       {
         path: "category",
         element: <Category />,
       },
       {
+        path: "feedback",
+        element: <Feedback />,
+      },
+      {
+        path: "send-message",
+        element: <Message/>,
+      },
+      {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "reported",
+        element: <Reported />,
       },
       {
         path: "sellers",

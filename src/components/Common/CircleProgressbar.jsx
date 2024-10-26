@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
 import cn from "../../utils/cn";
 
-const CircleProgressbar = ({ data, color = "#081621", className }) => {
+const CircleProgressbar = ({ data, color = "#081621", className, title }) => {
   const [percentage, setPercentage] = useState(0);
   const [number, setNumber] = useState(0);
   const circleRef = useRef(null);
@@ -38,7 +38,10 @@ const CircleProgressbar = ({ data, color = "#081621", className }) => {
           className
         )}
       >
-        <span className="progress-value relative">{number}</span>
+        <div className="flex flex-col items-center justify-center">
+          <span className="progress-value relative font-bold text-4xl">{number}</span>
+          <span className="progress-value relative font-medium text-sm">{title}</span>
+        </div>
       </div>
     </div>
   );
@@ -48,6 +51,7 @@ CircleProgressbar.propTypes = {
   data: PropTypes.number.isRequired,
   color: PropTypes.string,
   className: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default CircleProgressbar;

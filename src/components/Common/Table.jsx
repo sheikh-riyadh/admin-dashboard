@@ -30,14 +30,13 @@ const Table = ({ columns, tableData, className }) => {
             ))}
           </tr>
         </thead>
-        <tbody className={cn(`text-gray-600 text-sm font-light`, className)}>
+        <tbody
+          className={cn(`text-gray-600 text-sm font-light bg-white`, className)}
+        >
           {data?.map((item, index) => (
             <tr key={index} className="hover:bg-gray-50">
               {columns?.map((column, index) => (
-                <td
-                  key={index}
-                  className="p-4 border-t"
-                >
+                <td key={index} className="p-4 border-t">
                   {column?.render ? (
                     <column.render item={item} />
                   ) : (

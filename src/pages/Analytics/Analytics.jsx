@@ -2,6 +2,7 @@ import { FaUsers, FaShoppingBag, FaDollarSign } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import AnalyticeCard from "../../components/Pages/Analytics/AnalyticeCard";
 import AnalyticGraph from "../../components/Pages/Analytics/AnalyticGraph";
+import CircleProgressbar from "../../components/Common/CircleProgressbar";
 
 const Analytics = () => {
   const data = [
@@ -45,8 +46,18 @@ const Analytics = () => {
         ))}
       </div>
       <div className="mb-10 gap-5 h-full">
-        <div>
-          <AnalyticGraph />
+        <div className="grid grid-cols-12 gap-5">
+          <div className="col-span-9">
+            <AnalyticGraph />
+          </div>
+          <div className="col-span-3 grid grid-cols-1 gap-5">
+            <div className="bg-white rounded-md shadow-md border flex flex-col items-center justify-center p-5">
+              <CircleProgressbar title={"new visitor"} data={10}/>
+            </div>
+            <div className="bg-white rounded-md shadow-md border flex flex-col items-center justify-center p-5">
+              <CircleProgressbar title={"new users"} data={20} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

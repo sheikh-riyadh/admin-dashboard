@@ -1,7 +1,7 @@
 import {
-  FaAngleRight,
   FaBoxOpen,
   FaClipboardList,
+  FaEnvelope,
   FaExclamationTriangle,
   FaProductHunt,
   FaThumbsUp,
@@ -43,7 +43,7 @@ export const layout = {
     {
       name: "All Products",
       icon: <FaProductHunt />,
-      link: "/block-seller",
+      link: "/all-products",
     },
     {
       name: "Orders",
@@ -61,11 +61,6 @@ export const layout = {
       link: "/category",
     },
     {
-      name: "All Categories",
-      icon: <FaAngleRight />,
-      link: "/all-categories",
-    },
-    {
       name: "Staff",
       icon: <FaUserTie />,
       link: "/staff",
@@ -79,6 +74,11 @@ export const layout = {
       name: "Reported",
       icon: <FaExclamationTriangle />,
       link: "/reported",
+    },
+    {
+      name: "Send Message",
+      icon: <FaEnvelope />,
+      link: "/send-message",
     },
   ],
 };

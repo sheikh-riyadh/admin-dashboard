@@ -1,24 +1,10 @@
+import Table from "../../Common/Table";
+import { users } from "../../../data/Users/Users";
+import SelectInput from "../../Common/SelectInput";
 import { FaStreetView, FaTrash } from "react-icons/fa";
-import Table from "../../../Common/Table";
-import { users } from "../../../../data/Users/Users";
-import SelectInput from "../../../Common/SelectInput";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
-const UsersTable = () => {
-  const navigate = useNavigate();
-
-  const redirectUserDetailsHandler = (items) => {
-    if (items) {
-      navigate("/user-details", {
-        state: {
-          payload: { ...items },
-        },
-      });
-    } else {
-      toast.error("Data missing!. Please try again!");
-    }
-  };
+const ProductTable = () => {
+  const redirectUserDetailsHandler = () => {};
 
   return (
     <div className="overflow-hidden">
@@ -89,4 +75,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default ProductTable;
