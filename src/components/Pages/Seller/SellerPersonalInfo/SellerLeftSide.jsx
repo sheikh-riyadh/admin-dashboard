@@ -5,7 +5,7 @@ import Button from "../../../Common/Button";
 
 const SellerLeftSide = ({ data }) => {
   const navigate = useNavigate();
-  const user = data?.[0];
+  const seller = data;
 
   return (
     <div className="shadow-md rounded-md overflow-hidden border">
@@ -29,22 +29,22 @@ const SellerLeftSide = ({ data }) => {
           <div className="w-full rounded-md">
             <CommonComponent
               name={"Full Name"}
-              value={user?.firstName + " " + user?.lastName}
+              value={seller?.fullName}
             />
-            <CommonComponent name={"Phone"} value={user?.phone} />
-            <CommonComponent name={"Role"} value={user?.role} />
+            <CommonComponent name={"Phone"} value={seller?.phoneNumber} />
+            <CommonComponent name={"Role"} value={seller?.role} />
           </div>
           <div className="w-full rounded-md">
             <CommonComponent
               name={"Phone Verified"}
-              value={user?.phoneNumberVerified ? "Verified" : "Not Verified"}
+              value={seller?.phoneNumberVerified ? "Verified" : "Not Verified"}
             />
             <CommonComponent
               name={"Email Verified"}
-              value={user?.emailVerified ? "Verified" : "Not Verified"}
+              value={seller?.emailVerified ? "Verified" : "Not Verified"}
             />
 
-            <CommonComponent name={"User Status"} value={user?.status} />
+            <CommonComponent name={"seller Status"} value={seller?.status} />
           </div>
         </div>
       </div>

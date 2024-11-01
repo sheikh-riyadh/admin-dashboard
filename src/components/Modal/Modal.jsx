@@ -21,7 +21,7 @@ const Modal = ({ isOpen, onClose, className, title, children }) => {
   return (
     <div
       className={`fixed  top-0 left-0 z-50 bg-[#2222227c] overflow-x-hidden overflow-y-auto inset-0 h-[calc(100%)] max-h-full bg-black/90 flex flex-col justify-center items-center modal-overlay zoom-in-element ${
-        isOpen ? "" : "hidden"
+        isOpen ? "block" : "hidden"
       }`}
     >
       <div

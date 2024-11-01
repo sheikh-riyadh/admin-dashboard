@@ -1,40 +1,45 @@
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Table from "../../../Common/Table";
-import { users } from "../../../../data/Users/Users";
 import SelectInput from "../../../Common/SelectInput";
 import { FaStreetView, FaTrash } from "react-icons/fa";
+import { useGetAllSellerQuery } from "../../../../store/service/seller/sellerApi";
+import { ImSpinner9 } from "react-icons/im";
 
 const SellerTable = () => {
-    const navigate = useNavigate();
-  
-    const redirectUserDetailsHandler = (items) => {
-      if (items) {
-        navigate("/seller-details", {
-          state: {
-            payload: { ...items },
-          },
-        });
-      } else {
-        toast.error("Data missing!. Please try again!");
-      }
-    };
-  
-    return (
-      <div className="border rounded-md shadow-md">
+  const { data, isLoading } = useGetAllSellerQuery();
+  console.log(data);
+
+  const navigate = useNavigate();
+
+  const redirectUserDetailsHandler = (items) => {
+    if (items) {
+      navigate("/seller-details", {
+        state: {
+          payload: { ...items },
+        },
+      });
+    } else {
+      toast.error("Data missing!. Please try again!");
+    }
+  };
+
+  return (
+    <div className="border rounded-md shadow-md">
+      {!isLoading ? (
         <Table
           className="font-normal"
-          tableData={users.allUser}
+          tableData={data}
           columns={[
             {
               name: "Name",
-              dataIndex: "name",
-              key: "name",
+              dataIndex: "fullName",
+              key: "fullName",
             },
             {
               name: "Phone",
-              dataIndex: "phone",
-              key: "phone",
+              dataIndex: "phoneNumber",
+              key: "phoneNumber",
             },
             {
               name: "Email",
@@ -48,13 +53,15 @@ const SellerTable = () => {
             },
             {
               name: "Status",
-              render: () => {
+              render: ({ item }) => {
                 return (
                   <div>
-                    <SelectInput className="border bg-transparent rounded-full p-0 px-2 capitalize">
-                      <option value="active" selected>
-                        active
-                      </option>
+                    <SelectInput
+                      defaultValue={item.status}
+                      className="border bg-transparent rounded-full p-0 px-2 capitalize"
+                    >
+                      <option value="active">active</option>
+                      <option value="pending">pending</option>
                       <option value="block">block</option>
                     </SelectInput>
                   </div>
@@ -85,8 +92,14 @@ const SellerTable = () => {
             },
           ]}
         />
-      </div>
-    );
-  };;
+      ) : (
+        <div className="flex flex-col gap-5 items-center justify-center h-80 bg-white">
+          <ImSpinner9 className="text-6xl animate-spin" />
+          <span className="font-medium">Loading...</span>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default SellerTable;

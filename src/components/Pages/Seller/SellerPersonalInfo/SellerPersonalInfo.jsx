@@ -20,7 +20,7 @@ const SellerPersonalInfo = ({ data }) => {
         </div>
       </div>
       <div className="flex flex-col gap-5">
-        <BusinessInfo/>
+        <BusinessInfo data={data}/>
         <BannerInfo/>
         <SellerOrders/>
         <SellerIdentity/>
