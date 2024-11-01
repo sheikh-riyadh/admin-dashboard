@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import CommonComponent from "../../../Common/CommonComponent";
+import moment from "moment";
 
 const BusinessInfo = ({ data }) => {
   const seller = data;
@@ -53,7 +54,7 @@ const BusinessInfo = ({ data }) => {
               value={seller?.emailVerified ? "Verified" : "Not Verified"}
             />
 
-            <CommonComponent name={"seller Status"} value={seller?.status} />
+            <CommonComponent name={"CreatedAt"} value={moment(data?.createdAt).format('lll')} />
           </div>
         </div>
       </div>

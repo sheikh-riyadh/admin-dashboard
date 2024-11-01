@@ -6,8 +6,17 @@ const sellerApi = baseApi.injectEndpoints({
       query: () => ({
         url: "all-seller",
       }),
+      providesTags: ["seller"],
+    }),
+
+    updateSeller: build.mutation({
+      query: (data) => ({
+        url: "update-seller",
+        method: "PATCH",
+        body: data,
+      }),
     }),
   }),
 });
 
-export const { useGetAllSellerQuery } = sellerApi;
+export const { useGetAllSellerQuery, useUpdateSellerMutation } = sellerApi;

@@ -3,12 +3,19 @@ import { useNavigate } from "react-router-dom";
 import Table from "../../../Common/Table";
 import SelectInput from "../../../Common/SelectInput";
 import { FaStreetView, FaTrash } from "react-icons/fa";
-import { useGetAllSellerQuery } from "../../../../store/service/seller/sellerApi";
+import {
+  useGetAllSellerQuery,
+  useUpdateSellerMutation,
+} from "../../../../store/service/seller/sellerApi";
 import { ImSpinner9 } from "react-icons/im";
+import { useState } from "react";
 
 const SellerTable = () => {
+  const [statusValue, setStatusValue] = useState();
+
   const { data, isLoading } = useGetAllSellerQuery();
-  console.log(data);
+  const [updateSeller, { isLoading: updateLoading }] =
+    useUpdateSellerMutation();
 
   const navigate = useNavigate();
 
@@ -21,6 +28,20 @@ const SellerTable = () => {
       });
     } else {
       toast.error("Data missing!. Please try again!");
+    }
+  };
+
+  const handleUpdateSeller = async (updatedData) => {
+    try {
+      const {
+        data: { acknowledged, modifiedCount },
+      } = await updateSeller(updatedData);
+      if (acknowledged && modifiedCount > 0) {
+        toast.success("Status updated successfully", { id: "status_update" });
+        setStatusValue(updatedData.data.status);
+      }
+    } catch (error) {
+      toast.error("Something went wrong 😔", { id: `${error}` });
     }
   };
 
@@ -55,16 +76,23 @@ const SellerTable = () => {
               name: "Status",
               render: ({ item }) => {
                 return (
-                  <div>
-                    <SelectInput
-                      defaultValue={item.status}
-                      className="border bg-transparent rounded-full p-0 px-2 capitalize"
-                    >
-                      <option value="active">active</option>
-                      <option value="pending">pending</option>
-                      <option value="block">block</option>
-                    </SelectInput>
-                  </div>
+                  <SelectInput
+                    onChange={(e) =>
+                      handleUpdateSeller({
+                        _id: item._id,
+                        data: {
+                          status: e.target.value,
+                        },
+                      })
+                    }
+                    disabled={updateLoading}
+                    value={statusValue || item?.status}
+                    className="border bg-transparent rounded-full p-1 px-2 capitalize"
+                  >
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="blocked">Block</option>
+                  </SelectInput>
                 );
               },
             },
