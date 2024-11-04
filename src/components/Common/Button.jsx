@@ -16,7 +16,7 @@ const Button = ({ children, className, ...rest }) => {
 };
 
 Button.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
 };
 

@@ -13,7 +13,9 @@ import {
   persistReducer,
 } from "redux-persist";
 import { baseApi } from "../api/baseApi";
-import userReducer from "../features/userSlice";
+import userReducer from "../features/user/userSlice";
+import bannerReducer from "../features/banner/bannerSlice";
+import { imgbbApi } from "../service/imageUpload/imageUploadApi";
 
 const persistConfig = {
   key: "root",
@@ -34,6 +36,7 @@ const rootPersistReducers = combineReducers({
 
 const sessionReducers = combineReducers({
   userReducer,
+  bannerReducer,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootPersistReducers);
@@ -45,13 +48,16 @@ const store = configureStore({
     local: persistedReducers,
     session: sessionReducer,
     [baseApi.reducerPath]: baseApi.reducer,
+    [imgbbApi.reducerPath]: imgbbApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(baseApi.middleware),
+    })
+      .concat(baseApi.middleware)
+      .concat(imgbbApi.middleware),
 });
 
 export default store;

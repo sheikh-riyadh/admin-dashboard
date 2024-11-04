@@ -5,13 +5,38 @@ import TextArea from "../../components/Common/TextArea";
 import { useForm } from "react-hook-form";
 import ImageUpload from "../../components/Pages/Banner/ImageUpload";
 import LiveVideoUpload from "../../components/Pages/Banner/LiveVideoUpload";
+import { useSelector } from "react-redux";
+import { checkValues } from "../../utils/checkValues";
+import toast from "react-hot-toast";
+import { useCreateBannerMutation } from "../../store/service/banner/bannerApi";
+import SubmitButton from "../../components/Common/SubmitButton";
 
 const BannerInformation = () => {
   const [coverType, setCoverType] = useState("image");
-
+  const { images } = useSelector((state) => state.session.bannerReducer.value);
   const { register, handleSubmit, watch } = useForm();
 
-  const handleOnSubmit = () => {};
+  const [createBanner, { isLoading }] = useCreateBannerMutation();
+
+  const handleOnSubmit = async (data) => {
+    if (checkValues(images)) {
+      let newData;
+
+      if (coverType === "image") {
+        newData = { ...data, images, image: true };
+      } else {
+        newData = { ...data, live: true };
+      }
+      const result = await createBanner(newData);
+      if (!result?.error) {
+        toast.success(result.data?.message, { id: "banner_success" });
+      } else {
+        toast.error(result?.error?.data?.message, { id: "banner_error" });
+      }
+    } else {
+      toast.error("Banner image must filup", { id: "banner_error" });
+    }
+  };
 
   return (
     <div className="pb-8">
@@ -57,7 +82,7 @@ const BannerInformation = () => {
               placeholder="Enter description"
               required={true}
               {...register("description")}
-              className={"bg-transparent border"}
+              className={"bg-transparent border h-36"}
             />
             {coverType == "image" ? (
               <ImageUpload />
@@ -66,9 +91,9 @@ const BannerInformation = () => {
             )}
 
             <div className="flex flex-col items-end justify-end">
-              <Button className="w-36">
+              <SubmitButton isLoading={isLoading} className="w-36">
                 {coverType == "image" ? "Save image" : "Save live"}
-              </Button>
+              </SubmitButton>
             </div>
           </form>
         </div>
