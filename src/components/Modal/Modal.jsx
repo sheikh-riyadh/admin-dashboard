@@ -3,10 +3,21 @@ import PropTypes from "prop-types";
 import { FaCircleXmark } from "react-icons/fa6";
 import cn from "../../utils/cn";
 
-const Modal = ({ isOpen, onClose, className, title, children }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  className,
+  title,
+  children,
+  isOutsideClick = true,
+}) => {
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (isOpen && e.target.classList.contains("modal-overlay")) {
+      if (
+        isOpen &&
+        e.target.classList.contains("modal-overlay") &&
+        isOutsideClick
+      ) {
         onClose();
       }
     };
@@ -16,7 +27,7 @@ const Modal = ({ isOpen, onClose, className, title, children }) => {
     return () => {
       window.removeEventListener("click", handleOutsideClick);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, isOutsideClick]);
 
   return (
     <div
@@ -51,6 +62,7 @@ Modal.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   title: PropTypes.string,
+  isOutsideClick: PropTypes.bool,
 };
 
 export default Modal;

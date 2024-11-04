@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../../components/Common/Button";
-import UsersTable from "../../components/Pages/Users/UsersTable/UsersTable";
 import Modal from "../../components/Modal/Modal";
 import StaffForm from "../../components/Pages/Staff/StaffForm";
+import StaffTable from "../../components/Pages/Staff/StaffTable";
 
 const Staff = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +23,7 @@ const Staff = () => {
           </div>
         </div>
         <div className="shadow-md border rounded-md overflow-hidden">
-          <UsersTable />
+          <StaffTable />
         </div>
       </div>
       {isModalOpen && (
@@ -33,7 +33,7 @@ const Staff = () => {
           onClose={setIsModalOpen}
           isOpen={isModalOpen}
         >
-          <StaffForm />
+          <StaffForm setIsModalOpen={setIsModalOpen} />
         </Modal>
       )}
     </div>

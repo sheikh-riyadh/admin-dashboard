@@ -5,11 +5,10 @@ import {
   FaExclamationTriangle,
   FaProductHunt,
   FaThumbsUp,
-  FaUserLock,
   FaUsers,
   FaUserTie,
 } from "react-icons/fa";
-import { FaShop, FaShopLock } from "react-icons/fa6";
+import { FaShop} from "react-icons/fa6";
 import { MdWindow } from "react-icons/md";
 import { PiSlideshowFill } from "react-icons/pi";
 
@@ -26,19 +25,9 @@ export const layout = {
       link: "/users",
     },
     {
-      name: "Block Users",
-      icon: <FaUserLock />,
-      link: "/block-users",
-    },
-    {
       name: "Sellers",
       icon: <FaShop />,
       link: "/sellers",
-    },
-    {
-      name: "Block Seller",
-      icon: <FaShopLock />,
-      link: "/block-seller",
     },
     {
       name: "All Products",

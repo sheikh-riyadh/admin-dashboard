@@ -3,8 +3,8 @@ import { baseApi } from "../../api/baseApi";
 const sellerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllSeller: build.query({
-      query: () => ({
-        url: "all-seller",
+      query: (status) => ({
+        url: `all-seller?status=${status ? status : ""}`,
       }),
       providesTags: ["seller"],
     }),
@@ -15,8 +15,21 @@ const sellerApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["seller"],
+    }),
+
+    deleteSeller: build.mutation({
+      query: (id) => ({
+        url: `delete-seller/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags:["seller"]
     }),
   }),
 });
 
-export const { useGetAllSellerQuery, useUpdateSellerMutation } = sellerApi;
+export const {
+  useGetAllSellerQuery,
+  useUpdateSellerMutation,
+  useDeleteSellerMutation,
+} = sellerApi;

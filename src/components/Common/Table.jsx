@@ -17,7 +17,7 @@ const Table = ({ columns, tableData, className }) => {
 
   return (
     <div className="overflow-x-auto">
-      {data ? (
+      {data?.length ? (
         <table
           className={cn(`min-w-full bg-white rounded-lg shadow-md`, className)}
         >
