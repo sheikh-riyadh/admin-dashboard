@@ -8,6 +8,7 @@ import {
 } from "../../../store/service/staff/staffApi";
 import toast from "react-hot-toast";
 import SubmitButton from "../../Common/SubmitButton";
+import { useEffect } from "react";
 
 const StaffForm = ({ updateData, setIsModalOpen }) => {
   const { handleSubmit, register, setValue } = useForm({
@@ -15,7 +16,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
       name: "",
       email: "",
       password: "",
-      role: "",
+      role: "admin",
     },
   });
   const [createStaff, { isLoading: staffCreateLoading }] =
@@ -55,13 +56,15 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
     }
   };
 
-  for (const key in updateData) {
-    if (Object.prototype.hasOwnProperty.call(updateData, key)) {
-      if (key !== "_id") {
-        setValue(key, updateData[key]);
+  useEffect(() => {
+    for (const key in updateData) {
+      if (Object.prototype.hasOwnProperty.call(updateData, key)) {
+        if (key !== "_id") {
+          setValue(key, updateData[key]);
+        }
       }
     }
-  }
+  }, [updateData,setValue]);
 
   return (
     <div>
@@ -106,7 +109,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
 };
 
 StaffForm.propTypes = {
-  updateData: PropTypes.string,
+  updateData: PropTypes.object,
   setIsModalOpen: PropTypes.func,
 };
 

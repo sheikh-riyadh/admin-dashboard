@@ -2,9 +2,9 @@ import { baseApi } from "../../api/baseApi";
 
 const bannerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllBanner: build.query({
-      query: () => ({
-        url: `all-banner`,
+    getBanner: build.query({
+      query: (type) => ({
+        url: `banner/${type}`,
       }),
       providesTags: ["banner"],
     }),
@@ -25,20 +25,11 @@ const bannerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["banner"],
     }),
-
-    deleteBanner: build.mutation({
-      query: (id) => ({
-        url: `delete-banner/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["banner"],
-    }),
   }),
 });
 
 export const {
-  useGetAllBannerQuery,
+  useGetBannerQuery,
   useCreateBannerMutation,
   useUpdateBannerMutation,
-  useDeleteBannerMutation,
 } = bannerApi;

@@ -1,42 +1,94 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../../components/Common/Button";
 import Input from "../../components/Common/Input";
 import TextArea from "../../components/Common/TextArea";
-import { useForm } from "react-hook-form";
 import ImageUpload from "../../components/Pages/Banner/ImageUpload";
-import LiveVideoUpload from "../../components/Pages/Banner/LiveVideoUpload";
+import VideoUpload from "../../components/Pages/Banner/VideoUpload";
+import SubmitButton from "../../components/Common/SubmitButton";
+import {
+  useCreateBannerMutation,
+  useGetBannerQuery,
+  useUpdateBannerMutation,
+} from "../../store/service/banner/bannerApi";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { checkValues } from "../../utils/checkValues";
-import toast from "react-hot-toast";
-import { useCreateBannerMutation } from "../../store/service/banner/bannerApi";
-import SubmitButton from "../../components/Common/SubmitButton";
 
 const BannerInformation = () => {
-  const [coverType, setCoverType] = useState("image");
-  const { images } = useSelector((state) => state.session.bannerReducer.value);
-  const { register, handleSubmit, watch } = useForm();
+  const [type, setType] = useState("image");
+  const { register, handleSubmit, watch, setValue, reset } = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+      videoURL: "",
+    },
+  });
 
+  const { images } = useSelector((state) => state.session.bannerReducer.value);
+
+  const { data: bannerData } = useGetBannerQuery(type);
   const [createBanner, { isLoading }] = useCreateBannerMutation();
+  const [updateBanner, { isLoading: updateLoading }] =
+    useUpdateBannerMutation();
 
   const handleOnSubmit = async (data) => {
-    if (checkValues(images)) {
-      let newData;
+    let newData;
 
-      if (coverType === "image") {
-        newData = { ...data, images, image: true };
+    if (!checkValues(images)) {
+      toast.error("Banner image must be fillup", { id: "empty_error" });
+    } else {
+      if (type == "image") {
+        delete data.videoURL;
+        newData = { ...data, images, type, default: true };
       } else {
-        newData = { ...data, live: true };
+        newData = { ...data, type, default: true };
       }
-      const result = await createBanner(newData);
-      if (!result?.error) {
-        toast.success(result.data?.message, { id: "banner_success" });
+    }
+
+    if (!bannerData?._id) {
+      const res = await createBanner(newData);
+      if (!res?.error) {
+        toast.success("Banner created successfully", { id: "success" });
       } else {
-        toast.error(result?.error?.data?.message, { id: "banner_error" });
+        toast.error("Something went wrong", { id: "create_error" });
       }
     } else {
-      toast.error("Banner image must filup", { id: "banner_error" });
+      if (type == "image") {
+        delete data.videoURL;
+        const res = await updateBanner({
+          _id: bannerData?._id,
+          data: { ...newData },
+        });
+        if (!res?.error) {
+          toast.success("Updated banner successfully");
+        } else {
+          toast.error("Something went wrong", { id: "update_error" });
+        }
+      } else {
+        const res = await updateBanner({
+          _id: bannerData?._id,
+          data: { ...newData },
+        });
+        if (!res?.error) {
+          toast.success("Updated banner successfully");
+        } else {
+          toast.error("Something went wrong", { id: "update_error" });
+        }
+      }
     }
   };
+
+  useEffect(() => {
+    reset();
+    for (const key in bannerData) {
+      if (Object.prototype.hasOwnProperty.call(bannerData, key)) {
+        if (key !== "_id") {
+          setValue(key, bannerData[key]);
+        }
+      }
+    }
+  }, [bannerData, setValue, reset]);
 
   return (
     <div className="pb-8">
@@ -49,15 +101,15 @@ const BannerInformation = () => {
               Which one you set as a cover?
             </p>
             <div className="flex items-center justify-start mt-4 gap-x-4">
-              {["image", "live"].map((option) => (
+              {["image", "video"].map((option) => (
                 <Button
-                  onClick={() => setCoverType(option)}
+                  onClick={() => setType(option)}
                   key={option}
                   className="flex items-center gap-2 cursor-pointer bg-transparent border-none  text-black w-20"
                 >
                   <div
                     className={`w-4 h-4 rounded-full border duration-300 ${
-                      coverType == option && "bg-secondary"
+                      type == option && "bg-secondary"
                     }`}
                   ></div>
                   <span className="capitalize">{option}</span>
@@ -84,15 +136,18 @@ const BannerInformation = () => {
               {...register("description")}
               className={"bg-transparent border h-36"}
             />
-            {coverType == "image" ? (
+            {type == "image" ? (
               <ImageUpload />
             ) : (
-              <LiveVideoUpload register={register} watch={watch} />
+              <VideoUpload register={register} watch={watch} />
             )}
 
             <div className="flex flex-col items-end justify-end">
-              <SubmitButton isLoading={isLoading} className="w-36">
-                {coverType == "image" ? "Save image" : "Save live"}
+              <SubmitButton
+                isLoading={isLoading || updateLoading}
+                className="w-36"
+              >
+                {type == "image" ? "Save image" : "Save video"}
               </SubmitButton>
             </div>
           </form>

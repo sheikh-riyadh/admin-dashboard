@@ -8,6 +8,7 @@ import {
   handleImages,
 } from "../../../store/features/banner/bannerSlice";
 import Input from "../../Common/Input";
+import toast from "react-hot-toast";
 
 const ImageUpload = () => {
   const [imageIndex, setImageIndex] = useState(0);
@@ -24,14 +25,17 @@ const ImageUpload = () => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const response = await uploadImage(formData).unwrap();
-
-    dispatch(
-      handleImages({
-        index,
-        data: response.data?.display_url,
-      })
-    );
+    try {
+      const response = await uploadImage(formData).unwrap();
+      dispatch(
+        handleImages({
+          index,
+          data: response.data?.display_url,
+        })
+      );
+    } catch (error) {
+      toast.error("Something went wrong ", { id: error });
+    }
   };
 
   const handleDelete = (index) => {
