@@ -16,6 +16,11 @@ const bannerSlice = createSlice({
     handleDeleteBanner: (state, { payload }) => {
       state.value.images[payload] = null;
     },
+
+    handleSetImage: (state, { payload }) => {
+      state.value.images = payload;
+    },
+
     handleClear: (state) => {
       (state.value.keyFeatures = []),
         (state.value.description = ""),
@@ -25,7 +30,7 @@ const bannerSlice = createSlice({
   },
 });
 
-export const { handleImages, handleClear, handleDeleteBanner } =
+export const { handleImages, handleClear, handleDeleteBanner, handleSetImage } =
   bannerSlice.actions;
 
 export default bannerSlice.reducer;

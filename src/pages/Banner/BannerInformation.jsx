@@ -12,8 +12,9 @@ import {
   useUpdateBannerMutation,
 } from "../../store/service/banner/bannerApi";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { checkValues } from "../../utils/checkValues";
+import { handleSetImage } from "../../store/features/banner/bannerSlice";
 
 const BannerInformation = () => {
   const [type, setType] = useState("image");
@@ -25,6 +26,7 @@ const BannerInformation = () => {
     },
   });
 
+  const dispatch = useDispatch();
   const { images } = useSelector((state) => state.session.bannerReducer.value);
 
   const { data: bannerData } = useGetBannerQuery(type);
@@ -79,6 +81,9 @@ const BannerInformation = () => {
     }
   };
 
+
+
+
   useEffect(() => {
     reset();
     for (const key in bannerData) {
@@ -88,7 +93,18 @@ const BannerInformation = () => {
         }
       }
     }
-  }, [bannerData, setValue, reset]);
+    if (bannerData?.type == "image") {
+      dispatch(handleSetImage(bannerData?.images));
+    }
+
+    if(!bannerData?.default && bannerData?.type!="image"){
+      setType("video");
+    }else{
+      setType(bannerData?.type)
+    }
+
+
+  }, [bannerData, setValue, reset, dispatch]);
 
   return (
     <div className="pb-8">

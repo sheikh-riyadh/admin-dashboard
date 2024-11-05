@@ -44,7 +44,7 @@ const ImageUpload = () => {
 
   return (
     <div className="grid grid-cols-4 gap-5">
-      {[...Array(images.length).keys()].map((_, index) => (
+      {[...Array(images?.length).keys()].map((_, index) => (
         <div key={index} className="my-5 h-32 w-full relative">
           {!images[index] ? (
             <label
