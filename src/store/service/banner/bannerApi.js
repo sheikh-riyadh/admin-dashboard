@@ -8,6 +8,12 @@ const bannerApi = baseApi.injectEndpoints({
       }),
       providesTags: ["banner"],
     }),
+    getDefaultBanner: build.query({
+      query: () => ({
+        url: `banner`,
+      }),
+      providesTags: ["banner"],
+    }),
     createBanner: build.mutation({
       query: (data) => ({
         url: `create-banner`,
@@ -32,4 +38,5 @@ export const {
   useGetBannerQuery,
   useCreateBannerMutation,
   useUpdateBannerMutation,
+  useGetDefaultBannerQuery
 } = bannerApi;

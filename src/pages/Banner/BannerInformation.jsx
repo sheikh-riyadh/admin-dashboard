@@ -9,6 +9,7 @@ import SubmitButton from "../../components/Common/SubmitButton";
 import {
   useCreateBannerMutation,
   useGetBannerQuery,
+  useGetDefaultBannerQuery,
   useUpdateBannerMutation,
 } from "../../store/service/banner/bannerApi";
 import toast from "react-hot-toast";
@@ -18,6 +19,7 @@ import { handleSetImage } from "../../store/features/banner/bannerSlice";
 
 const BannerInformation = () => {
   const [type, setType] = useState("image");
+
   const { register, handleSubmit, watch, setValue, reset } = useForm({
     defaultValues: {
       title: "",
@@ -30,6 +32,7 @@ const BannerInformation = () => {
   const { images } = useSelector((state) => state.session.bannerReducer.value);
 
   const { data: bannerData } = useGetBannerQuery(type);
+  const { data: defaultBannerData } = useGetDefaultBannerQuery();
   const [createBanner, { isLoading }] = useCreateBannerMutation();
   const [updateBanner, { isLoading: updateLoading }] =
     useUpdateBannerMutation();
@@ -37,8 +40,9 @@ const BannerInformation = () => {
   const handleOnSubmit = async (data) => {
     let newData;
 
-    if (!checkValues(images)) {
+    if (type == "image" && !checkValues(images)) {
       toast.error("Banner image must be fillup", { id: "empty_error" });
+      return;
     } else {
       if (type == "image") {
         delete data.videoURL;
@@ -82,6 +86,10 @@ const BannerInformation = () => {
   };
 
 
+  useEffect(()=>{
+    setType(defaultBannerData?.type)
+  },[defaultBannerData])
+
 
 
   useEffect(() => {
@@ -93,17 +101,9 @@ const BannerInformation = () => {
         }
       }
     }
-    if (bannerData?.type == "image") {
+    if (bannerData?.images) {
       dispatch(handleSetImage(bannerData?.images));
     }
-
-    if(!bannerData?.default && bannerData?.type!="image"){
-      setType("video");
-    }else{
-      setType(bannerData?.type)
-    }
-
-
   }, [bannerData, setValue, reset, dispatch]);
 
   return (

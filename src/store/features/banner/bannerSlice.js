@@ -16,7 +16,6 @@ const bannerSlice = createSlice({
     handleDeleteBanner: (state, { payload }) => {
       state.value.images[payload] = null;
     },
-
     handleSetImage: (state, { payload }) => {
       state.value.images = payload;
     },

@@ -15,12 +15,13 @@ const VideoUpload = ({ register, watch }) => {
       />
 
       {videoURL ? (
-        <div className="flex justify-center items-center w-full mt-5">
-          <ReactPlayer url={videoURL} controls />
+        <div className="flex justify-center items-center w-full mt-5 h-[550px] object-cover">
+          <ReactPlayer
+          width={"100%"}
+          height={"100%"}
+          url={videoURL} />
         </div>
-      ) : (
-        ""
-      )}
+      ) : null}
     </div>
   );
 };
