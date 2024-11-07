@@ -3,15 +3,17 @@ import { useNavigate } from "react-router-dom";
 import CommonComponent from "../../../Common/CommonComponent";
 import Button from "../../../Common/Button";
 
-const UserDetailsRight = ({ data }) => {
+const UserDetailsRight = ({ data,isReport }) => {
   const navigate = useNavigate();
   return (
     <div className="shadow-md rounded-md border overflow-hidden">
       <div className="flex justify-between border-b bg-white p-4">
         <div>
-          <h2 className="capitalize text-2xl font-semibold text-gray-800 ">
+          {!isReport?<h2 className="capitalize text-2xl font-semibold text-gray-800 ">
             Personal Info
-          </h2>
+          </h2>:<p className="font-bold">
+              From : <span>{data?.fullName}</span>
+            </p>}
         </div>
         <div>
           <Button
@@ -53,6 +55,7 @@ const UserDetailsRight = ({ data }) => {
 
 UserDetailsRight.propTypes = {
   data: PropTypes.object,
+  isReport: PropTypes.bool,
 };
 
 export default UserDetailsRight;

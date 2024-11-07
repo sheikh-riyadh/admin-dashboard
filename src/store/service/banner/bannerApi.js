@@ -4,32 +4,34 @@ const bannerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getBanner: build.query({
       query: (type) => ({
-        url: `banner/${type}`,
+        url: `admin-banner/${type}`,
       }),
-      providesTags: ["banner"],
+      providesTags: ["admin-banner"],
     }),
+
     getDefaultBanner: build.query({
       query: () => ({
-        url: `banner`,
+        url: `admin-default-banner`,
       }),
-      providesTags: ["banner"],
+      providesTags: ["admin-banner"],
     }),
+
     createBanner: build.mutation({
       query: (data) => ({
-        url: `create-banner`,
+        url: `admin-create-banner`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["banner"],
+      invalidatesTags: ["admin-banner"],
     }),
 
     updateBanner: build.mutation({
       query: (data) => ({
-        url: "update-banner",
+        url: "admin-update-banner",
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["banner"],
+      invalidatesTags: ["admin-banner"],
     }),
   }),
 });
@@ -38,5 +40,5 @@ export const {
   useGetBannerQuery,
   useCreateBannerMutation,
   useUpdateBannerMutation,
-  useGetDefaultBannerQuery
+  useGetDefaultBannerQuery,
 } = bannerApi;

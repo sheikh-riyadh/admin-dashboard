@@ -1,4 +1,4 @@
-import UsersTable from "../../components/Pages/Users/UsersTable/UsersTable";
+import FeedbackTable from "../../components/Pages/Feedback/FeedbackTable";
 
 const Feedback = () => {
   return (
@@ -9,7 +9,7 @@ const Feedback = () => {
           <span className="font-bold text-xl text-white">Feedback</span>
         </div>
         <div className="shadow-md border rounded-md overflow-hidden">
-          <UsersTable />
+          <FeedbackTable />
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ import Reported from "../pages/Reported/Reported";
 import Message from "../pages/Message/Message";
 import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
+import ReportedView from "../components/Pages/Reported/ReportedView";
 
 const router = createBrowserRouter([
   {
@@ -46,10 +47,6 @@ const router = createBrowserRouter([
         element: <Feedback />,
       },
       {
-        path: "send-message",
-        element: <Message />,
-      },
-      {
         path: "orders",
         element: <Orders />,
       },
@@ -57,6 +54,15 @@ const router = createBrowserRouter([
         path: "reported",
         element: <Reported />,
       },
+      {
+        path: "reported-details",
+        element: <ReportedView />,
+      },
+      {
+        path: "send-message",
+        element: <Message />,
+      },
+
       {
         path: "sellers",
         element: <Sellers />,

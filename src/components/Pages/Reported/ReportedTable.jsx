@@ -1,32 +1,24 @@
-import { useState } from "react";
+import { FaStreetView, FaTrash } from "react-icons/fa";
+import Table from "../../Common/Table";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
-import { FaStreetView, FaTrash } from "react-icons/fa";
-import Table from "../../../Common/Table";
-import { useGetAllSellerQuery } from "../../../../store/service/seller/sellerApi";
-import Modal from "../../../Modal/Modal";
-import UpdateSellerStatus from "./UpdateSellerStatus";
-import DeleteSeller from "./DeleteSeller";
-import PropTypes from "prop-types";
 
-const SellerTable = ({ status }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sellerId, setSellerId] = useState("");
+const ReportedTable = () => {
+  const isLoading = "",
+    data = [...Array(4).keys()];
 
   const navigate = useNavigate();
-  const { data, isLoading } = useGetAllSellerQuery(status);
 
-  const redirectUserDetailsHandler = (items) => {
+  const redirectReportDetailsHandler = (items) => {
     if (items) {
-      navigate("/seller-details", {
+      navigate("/reported-details", {
         state: {
           payload: { ...items },
         },
       });
     } else {
       toast.error("Data missing!. Please try again!");
-
     }
   };
 
@@ -40,8 +32,8 @@ const SellerTable = ({ status }) => {
             columns={[
               {
                 name: "Name",
-                dataIndex: "fullName",
-                key: "fullName",
+                dataIndex: "name",
+                key: "name",
               },
               {
                 name: "Phone",
@@ -59,28 +51,24 @@ const SellerTable = ({ status }) => {
                 key: "role",
               },
               {
-                name: "Status",
-                render: ({ item }) => {
-                  return <UpdateSellerStatus item={item} />;
-                },
+                name: "Message",
+                dataIndex: "message",
+                key: "message",
               },
+
               {
                 name: "Actions",
                 render: ({ item }) => {
                   return (
                     <div className="flex items-center gap-2">
                       <span
-                        onClick={() => redirectUserDetailsHandler(item)}
+                        onClick={() => redirectReportDetailsHandler(item)}
                         className="text-stech cursor-pointer border border-stech text-center p-2 rounded-full"
                         title="View"
                       >
                         <FaStreetView />
                       </span>
                       <span
-                        onClick={() => {
-                          setSellerId(item?._id),
-                            setIsModalOpen((prev) => !prev);
-                        }}
                         className="text-danger cursor-pointer border border-danger text-center p-2 rounded-full hover:bg-red-300 hover:text-white duration-300"
                         title="Delete"
                       >
@@ -99,24 +87,8 @@ const SellerTable = ({ status }) => {
           </div>
         )}
       </div>
-      <div>
-        {isModalOpen && (
-          <Modal
-            isOpen={isModalOpen}
-            onClose={setIsModalOpen}
-            isOutsideClick={false}
-            className="w-[330px]"
-          >
-            <DeleteSeller sellerId={sellerId} setIsModalOpen={setIsModalOpen} />
-          </Modal>
-        )}
-      </div>
     </div>
   );
 };
 
-SellerTable.propTypes = {
-  status: PropTypes.string,
-};
-
-export default SellerTable;
+export default ReportedTable;

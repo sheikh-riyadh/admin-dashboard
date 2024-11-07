@@ -4,26 +4,26 @@ const sellerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllSeller: build.query({
       query: (status) => ({
-        url: `all-seller?status=${status ? status : ""}`,
+        url: `admin-all-seller?status=${status ? status : ""}`,
       }),
-      providesTags: ["seller"],
+      providesTags: ["admin-seller"],
     }),
 
     updateSeller: build.mutation({
       query: (data) => ({
-        url: "update-seller",
+        url: "admin-update-seller",
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["seller"],
+      invalidatesTags: ["admin-seller"],
     }),
 
     deleteSeller: build.mutation({
       query: (id) => ({
-        url: `delete-seller/${id}`,
+        url: `admin-delete-seller/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags:["seller"]
+      invalidatesTags:["admin-seller"]
     }),
   }),
 });

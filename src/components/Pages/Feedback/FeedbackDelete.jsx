@@ -1,11 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { FaTrash } from "react-icons/fa";
-import { useDeleteStaffMutation } from "../../../store/service/staff/staffApi";
 import DeleteModal from "../../Modal/DeleteModal";
-
-const DeleteStaff = ({ deleteId }) => {
-  const [deleteStaff, { isLoading }] = useDeleteStaffMutation();
+const FeedbackDelete = ({ deleteId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -20,8 +17,8 @@ const DeleteStaff = ({ deleteId }) => {
       <div>
         <DeleteModal
           deleteId={deleteId}
-          handleDeleteFunction={deleteStaff}
-          isLoading={isLoading}
+          // handleDeleteFunction={deleteStaff}
+          // isLoading={isLoading}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
         />
@@ -30,8 +27,8 @@ const DeleteStaff = ({ deleteId }) => {
   );
 };
 
-DeleteStaff.propTypes = {
+FeedbackDelete.propTypes = {
   deleteId: PropTypes.string,
 };
 
-export default DeleteStaff;
+export default FeedbackDelete;

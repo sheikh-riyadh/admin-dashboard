@@ -4,35 +4,35 @@ const sellerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllStaff: build.query({
       query: () => ({
-        url: `all-staff`,
+        url: `admin-all-staff`,
       }),
-      providesTags: ["staff"],
+      providesTags: ["admin-staff"],
     }),
 
     createStaff: build.mutation({
       query: (data) => ({
-        url: "create-staff",
+        url: "admin-create-staff",
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["staff"],
+      invalidatesTags: ["admin-staff"],
     }),
 
     updateStaff: build.mutation({
       query: (data) => ({
-        url: "update-staff",
+        url: "admin-update-staff",
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["staff"],
+      invalidatesTags: ["admin-staff"],
     }),
 
     deleteStaff: build.mutation({
       query: (id) => ({
-        url: `delete-staff/${id}`,
+        url: `admin-delete-staff/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["staff"],
+      invalidatesTags: ["admin-staff"],
     }),
   }),
 });

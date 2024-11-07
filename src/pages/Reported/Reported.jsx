@@ -1,4 +1,4 @@
-import UsersTable from "../../components/Pages/Users/UsersTable/UsersTable";
+import ReportedTable from "../../components/Pages/Reported/ReportedTable";
 
 const Reported = () => {
   return (
@@ -9,7 +9,7 @@ const Reported = () => {
           <span className="font-bold text-xl text-white">Reported</span>
         </div>
         <div className="shadow-md border rounded-md overflow-hidden">
-          <UsersTable />
+          <ReportedTable />
         </div>
       </div>
     </div>
