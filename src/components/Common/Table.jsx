@@ -23,6 +23,9 @@ const Table = ({ columns, tableData, className }) => {
         >
           <thead className="bg-gray-200">
             <tr>
+              <th className="p-4">
+                <span>SN</span>
+              </th>
               {columns?.map((column, index) => (
                 <th key={index} className="p-4 text-left hover:bg-gray-300">
                   <div className="flex items-center justify-between">
@@ -40,6 +43,7 @@ const Table = ({ columns, tableData, className }) => {
           >
             {data?.map((item, index) => (
               <tr key={index} className="hover:bg-gray-50">
+                <td className="p-4 border-t text-center">{index + 1}</td>
                 {columns?.map((column, index) => (
                   <td key={index} className="p-4 border-t">
                     {column?.render ? (
@@ -68,8 +72,10 @@ const Table = ({ columns, tableData, className }) => {
         </table>
       ) : (
         <div className="flex gap-5 flex-col items-center justify-center w-full h-80 bg-white">
-          <FaClipboard className="text-8xl text-slate"  />
-          <span className="font-medium text-xl text-danger capitalize">No data found</span>
+          <FaClipboard className="text-8xl text-slate" />
+          <span className="font-medium text-xl text-danger capitalize">
+            No data found
+          </span>
         </div>
       )}
     </div>

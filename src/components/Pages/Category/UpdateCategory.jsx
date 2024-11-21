@@ -1,18 +1,15 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import Modal from "../../Modal/Modal";
-import StaffForm from "./StaffForm";
-
-const UpdateStaff = ({ item }) => {
-  const [updateData, setUpdateData] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+import CategoryForm from "./CategoryForm";
+const UpdateCategory = ({ item }) => {
+  const [isModalOpen, setIsModalOpen] = useState();
   return (
     <>
       <span
         onClick={() => {
-          setUpdateData(item), setIsModalOpen((prev) => !prev);
+          setIsModalOpen((prev) => !prev);
         }}
         className="text-stech cursor-pointer border border-stech text-center p-2 rounded-full"
         title="Update"
@@ -28,10 +25,7 @@ const UpdateStaff = ({ item }) => {
             isOpen={isModalOpen}
             isOutsideClick={false}
           >
-            <StaffForm
-              setIsModalOpen={setIsModalOpen}
-              updateData={updateData}
-            />
+            <CategoryForm setIsModalOpen={setIsModalOpen} updateData={item} />
           </Modal>
         )}
       </div>
@@ -39,8 +33,7 @@ const UpdateStaff = ({ item }) => {
   );
 };
 
-UpdateStaff.propTypes = {
+UpdateCategory.propTypes = {
   item: PropTypes.object,
 };
-
-export default UpdateStaff;
+export default UpdateCategory;

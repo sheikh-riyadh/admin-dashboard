@@ -30,7 +30,7 @@ const UserDetailsRight = ({ data,isReport }) => {
           <div className="w-full rounded-md">
             <CommonComponent
               name={"Full Name"}
-              value={data?.firstName + " " + data?.lastName}
+              value={data?.fullName}
             />
             <CommonComponent name={"Phone"} value={data?.phone} />
             <CommonComponent name={"Role"} value={data?.role} />

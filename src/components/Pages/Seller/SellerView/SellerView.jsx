@@ -9,7 +9,6 @@ const SellerView = () => {
   const [tab, setTab] = useState(1);
   const location = useLocation();
   const data = location?.state?.payload;
-  console.log(data)
 
   return (
     <div className="p-5 flex flex-col gap-5">

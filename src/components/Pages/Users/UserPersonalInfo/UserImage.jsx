@@ -6,7 +6,7 @@ const UserImage = ({ data }) => {
       {data ? (
         <img
           className="h-44 w-44 rounded-full border"
-          src=""
+          src={data}
           alt="user_photo"
         />
       ) : (
@@ -19,6 +19,6 @@ const UserImage = ({ data }) => {
 };
 
 UserImage.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.string,
 };
 export default UserImage;

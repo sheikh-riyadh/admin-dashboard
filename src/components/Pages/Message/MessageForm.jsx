@@ -9,6 +9,7 @@ import {
   useUpdateAdminMessageMutation,
 } from "../../../store/service/adminMessage/adminMessageApi";
 import toast from "react-hot-toast";
+import SelectInput from "../../Common/SelectInput";
 
 const MessageForm = ({ updateMessage, setIsModalOpen }) => {
   const { handleSubmit, register, setValue } = useForm();
@@ -64,6 +65,17 @@ const MessageForm = ({ updateMessage, setIsModalOpen }) => {
   return (
     <div>
       <form onSubmit={handleSubmit(handleMessage)}>
+        <SelectInput
+          label="Message to : "
+          {...register("to")}
+          required
+          defaultValue={"user"}
+        >
+          <option value="">Select</option>
+          <option value="user">User</option>
+          <option value="seller">Seller</option>
+        </SelectInput>
+
         <Input
           {...register("title")}
           label={"Title"}

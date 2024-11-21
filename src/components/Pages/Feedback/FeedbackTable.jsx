@@ -2,12 +2,10 @@ import { ImSpinner9 } from "react-icons/im";
 import Table from "../../Common/Table";
 import FeedbackDelete from "./FeedbackDelete";
 import FeedbackView from "./FeedbackView";
+import { useFeedbackQuery } from "../../../store/service/feedback/feedbackApi";
 
 const FeedbackTable = () => {
-  const isLoading = "",
-    data = [...Array(4).keys()];
-
-
+  const { data, isLoading } = useFeedbackQuery();
   return (
     <div>
       <div className="border rounded-md shadow-md">

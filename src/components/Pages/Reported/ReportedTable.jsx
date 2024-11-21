@@ -3,10 +3,10 @@ import Table from "../../Common/Table";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
+import { useUserReportsQuery } from "../../../store/service/report/reportApi";
 
 const ReportedTable = () => {
-  const isLoading = "",
-    data = [...Array(4).keys()];
+  const { data, isLoading } = useUserReportsQuery();
 
   const navigate = useNavigate();
 
@@ -32,28 +32,43 @@ const ReportedTable = () => {
             columns={[
               {
                 name: "Name",
-                dataIndex: "name",
-                key: "name",
-              },
-              {
-                name: "Phone",
-                dataIndex: "phoneNumber",
-                key: "phoneNumber",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.from?.fName + "" + item?.from?.lName}</span>
+                    </div>
+                  );
+                },
               },
               {
                 name: "Email",
-                dataIndex: "email",
-                key: "email",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.from?.email}</span>
+                    </div>
+                  );
+                },
               },
               {
-                name: "Role",
-                dataIndex: "role",
-                key: "role",
+                name: "Title",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.report?.title}</span>
+                    </div>
+                  );
+                },
               },
               {
                 name: "Message",
-                dataIndex: "message",
-                key: "message",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.report?.reportMessage}</span>
+                    </div>
+                  );
+                },
               },
 
               {

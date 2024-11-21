@@ -13,7 +13,7 @@ const SelectInput = forwardRef(
         )}
         <select
           className={cn(
-            `focus:outline-none bg-gray-100 w-full py-2 px-2 rounded-md`,
+            `focus:outline-none bg-gray-100 w-full p-2 rounded-md`,
             className
           )}
           {...rest}

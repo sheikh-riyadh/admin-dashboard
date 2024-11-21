@@ -8,7 +8,12 @@ const sellerApi = baseApi.injectEndpoints({
       }),
       providesTags: ["admin-seller"],
     }),
-
+    getSellerById: build.query({
+      query: (sellerId) => ({
+        url: `admin-seller-by-id/${sellerId}`,
+      }),
+      providesTags:["admin-seller"]
+    }),
     updateSeller: build.mutation({
       query: (data) => ({
         url: "admin-update-seller",
@@ -17,13 +22,12 @@ const sellerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["admin-seller"],
     }),
-
     deleteSeller: build.mutation({
       query: (id) => ({
         url: `admin-delete-seller/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags:["admin-seller"]
+      invalidatesTags: ["admin-seller"],
     }),
   }),
 });
@@ -32,4 +36,5 @@ export const {
   useGetAllSellerQuery,
   useUpdateSellerMutation,
   useDeleteSellerMutation,
+  useGetSellerByIdQuery
 } = sellerApi;

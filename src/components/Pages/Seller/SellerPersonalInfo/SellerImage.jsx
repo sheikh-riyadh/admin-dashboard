@@ -6,7 +6,7 @@ const SellerImage = ({ data }) => {
       {data ? (
         <img
           className="h-44 w-44 border rounded-full"
-          src=""
+          src={data}
           alt="user_photo"
         />
       ) : (
@@ -19,6 +19,6 @@ const SellerImage = ({ data }) => {
 };
 
 SellerImage.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.string,
 };
 export default SellerImage;
