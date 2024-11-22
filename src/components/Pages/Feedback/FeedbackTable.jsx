@@ -3,6 +3,7 @@ import Table from "../../Common/Table";
 import FeedbackDelete from "./FeedbackDelete";
 import FeedbackView from "./FeedbackView";
 import { useFeedbackQuery } from "../../../store/service/feedback/feedbackApi";
+import moment from "moment";
 
 const FeedbackTable = () => {
   const { data, isLoading } = useFeedbackQuery();
@@ -15,31 +16,60 @@ const FeedbackTable = () => {
             tableData={data}
             columns={[
               {
-                name: "Name",
-                dataIndex: "name",
-                key: "name",
+                name: "Photo",
+                render: ({ item }) => {
+                  return (
+                    <div className="w-10 h-10 rounded-full">
+                      <img
+                        className="rounded-full w-full h-full"
+                        src={item?.user?.photo}
+                        alt="user"
+                      />
+                    </div>
+                  );
+                },
               },
+
               {
-                name: "Phone",
-                dataIndex: "phoneNumber",
-                key: "phoneNumber",
+                name: "Name",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.user?.fName + "" + item?.user?.lName}</span>
+                    </div>
+                  );
+                },
               },
               {
                 name: "Email",
-                dataIndex: "email",
-                key: "email",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.user?.email}</span>
+                    </div>
+                  );
+                },
               },
               {
-                name: "Role",
-                dataIndex: "role",
-                key: "role",
+                name: "Phone",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{item?.user?.phone}</span>
+                    </div>
+                  );
+                },
               },
               {
-                name: "Message",
-                dataIndex: "message",
-                key: "message",
+                name: "CreatedAt",
+                render: ({ item }) => {
+                  return (
+                    <div>
+                      <span>{moment(item?.user?.createdAt).format("L")}</span>
+                    </div>
+                  );
+                },
               },
-
               {
                 name: "Actions",
                 render: ({ item }) => {

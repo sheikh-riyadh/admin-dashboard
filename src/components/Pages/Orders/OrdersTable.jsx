@@ -99,7 +99,7 @@ const OrdersTable = () => {
           ]}
         />
       ) : (
-        <div className="flex flex-col gap-1 items-center justify-center h-screen">
+        <div className="flex flex-col gap-1 items-center justify-center h-screen bg-white">
           <FaFutbol className="animate-spin text-6xl" />
           <span>Loading...</span>
         </div>

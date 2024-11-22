@@ -16,6 +16,7 @@ import Message from "../pages/Message/Message";
 import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
 import ReportedView from "../components/Pages/Reported/ReportedView";
+import ProductDetails from "../pages/Products/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "product-details",
+        element: <ProductDetails />,
       },
       {
         path: "reported",

@@ -13,7 +13,7 @@ const ProductTable = () => {
 
   const redirectUserDetailsHandler = (items) => {
     if (items) {
-      navigate("/update-product", {
+      navigate("/product-details", {
         state: {
           payload: { ...items },
         },
