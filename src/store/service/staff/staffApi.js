@@ -3,12 +3,17 @@ import { baseApi } from "../../api/baseApi";
 const sellerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllStaff: build.query({
-      query: () => ({
-        url: `admin-all-staff`,
+      query: (email) => ({
+        url: `admin-all-staff/${email}`,
       }),
       providesTags: ["admin-staff"],
     }),
-
+    getAdmin: build.query({
+      query: (email) => ({
+        url: `admin-by-email/${email}`,
+      }),
+      providesTags: ["admin-staff"],
+    }),
     createStaff: build.mutation({
       query: (data) => ({
         url: "admin-create-staff",
@@ -42,4 +47,5 @@ export const {
   useCreateStaffMutation,
   useUpdateStaffMutation,
   useDeleteStaffMutation,
+  useLazyGetAdminQuery,
 } = sellerApi;

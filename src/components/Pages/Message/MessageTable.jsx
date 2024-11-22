@@ -24,6 +24,11 @@ const MessageTable = () => {
                 dataIndex: "message",
                 key: "message",
               },
+              {
+                name: "To",
+                dataIndex: "to",
+                key: "to",
+              },
 
               {
                 name: "Actions",

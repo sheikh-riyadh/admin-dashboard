@@ -3,9 +3,11 @@ import { useGetAllStaffQuery } from "../../../store/service/staff/staffApi";
 import Table from "../../Common/Table";
 import UpdateStaff from "./UpdateStaff";
 import DeleteStaff from "./DeleteStaff";
+import { useGetUser } from "../../../hooks/useGetUser";
 
 const StaffTable = () => {
-  const { data, isLoading } = useGetAllStaffQuery();
+  const { user } = useGetUser();
+  const { data, isLoading } = useGetAllStaffQuery(user?.email);
 
   return (
     <div>

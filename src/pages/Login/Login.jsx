@@ -1,14 +1,50 @@
 import { useForm } from "react-hook-form";
 import Input from "../../components/Common/Input";
-import Button from "../../components/Common/Button";
 import { FaLock } from "react-icons/fa";
-import mountain from "../../assets/mountain.png"
+import mountain from "../../assets/mountain.png";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../../store/features/user/userSlice";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase.config";
+import SubmitButton from "../../components/Common/SubmitButton";
+import { useLazyGetAdminQuery } from "../../store/service/staff/staffApi";
 
 const Login = () => {
-  const { handleSubmit, register } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { handleSubmit, register } = useForm();
+  const [getAdmin] = useLazyGetAdminQuery();
+
+  const handleLogin = async ({ email, password }) => {
+    setIsLoading(true);
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      if (result?.user?.accessToken && result.user.email) {
+        const res = await getAdmin(result.user.email);
+        if (res?.data?.email) {
+          dispatch(addUser({ ...res?.data }));
+          setIsLoading(false);
+          navigate("/");
+        } else {
+          toast.error("Something went wrong 😓", { id: "error" });
+          setIsLoading(false);
+        }
+      }
+    } catch (error) {
+      if (error.message == "Firebase: Error (auth/invalid-credential).") {
+        toast.error("Invalid credential", { id: "invalid" });
+        setIsLoading(false);
+      } else {
+        toast.error("Something went wrong 😓", { id: "error" });
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -25,27 +61,31 @@ const Login = () => {
             <h1 className="font-bold text-3xl capitalize">Admin Pannel</h1>
             <div className="w-full flex flex-col gap-5">
               <Input
-                {...register("Email")}
+                {...register("email")}
                 placeholder="Email *"
                 type="email"
                 required
                 className="w-full"
               />
               <Input
-                {...register("Password")}
+                {...register("password")}
                 placeholder="*******"
                 type="password"
                 required
               />
             </div>
 
-            <Button className="bg-emerald-700">Sign In</Button>
+            <SubmitButton isLoading={isLoading} className="bg-emerald-700">
+              Sign In
+            </SubmitButton>
           </form>
         </div>
       </div>
       <img
-      className="absolute top-0 h-screen w-full z-0"
-      src={mountain} alt="" />
+        className="absolute top-0 h-screen w-full z-0"
+        src={mountain}
+        alt=""
+      />
     </div>
   );
 };

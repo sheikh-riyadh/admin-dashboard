@@ -30,6 +30,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
     useUpdateStaffMutation();
 
   const handleStaff = async (data) => {
+    setIsLoading(true);
     if (updateData) {
       try {
         const result = await updateStaff({ _id: updateData?._id, data: data });
@@ -37,12 +38,14 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           toast.error(result?.error?.data.message, {
             id: "update_staff_error",
           });
+          setIsLoading(false);
         } else {
           toast.success("Staff updated successfully", { id: "success" });
           setIsModalOpen(false);
         }
       } catch (error) {
         toast.error("Something went wrong 😓", { id: `${error}` });
+        setIsLoading(false);
       }
     } else {
       try {
@@ -57,6 +60,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
             toast.error(res?.error?.data.message, {
               id: "create_staff_error",
             });
+            setIsLoading(false);
           } else {
             toast.success(res.data?.message, { id: "success" });
             setIsModalOpen(false);
@@ -67,10 +71,12 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           toast.error(`Email ${data?.email} already used`, {
             id: "email_error",
           });
+          setIsLoading(false);
         } else {
           toast.error("Something went wrong please try again letter", {
             id: "try_again_letter",
           });
+          setIsLoading(false);
         }
         setIsLoading(false);
       }
@@ -104,14 +110,15 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           disabled={updateData}
           value={updateData ? updateData?.email : undefined}
         />
-        <Input
-          {...register("password")}
-          label={"Password"}
-          placeholder={"Staff Password"}
-          required
-          disabled={updateData}
-          value={updateData ? updateData?.password : undefined}
-        />
+        {!updateData ? (
+          <Input
+            {...register("password")}
+            label={"Password"}
+            placeholder={"Staff Password"}
+            required
+            type="password"
+          />
+        ) : null}
         <SelectInput
           defaultValue={"admin"}
           {...register("role")}
@@ -119,11 +126,11 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           required
         >
           <option value="admin">Admin</option>
-          <option value="moderator">Moderator</option>
-          <option value="editor">Editor</option>
+          <option disabled>{`Moderator (Working..)`}</option>
+          <option disabled>{`Editor (Working..)`}</option>
         </SelectInput>
         <SubmitButton
-          isLoading={staffCreateLoading || updateStaffLoading || isLoading}
+          isLoading={isLoading || staffCreateLoading || updateStaffLoading}
           className="mt-5"
         >
           Save

@@ -17,6 +17,7 @@ import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
 import ReportedView from "../components/Pages/Reported/ReportedView";
 import ProductDetails from "../pages/Products/ProductDetails";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -25,68 +26,132 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Analytics />,
+        element: (
+          <PrivateRouter>
+            <Analytics />
+          </PrivateRouter>
+        ),
       },
       {
         path: "analytics",
-        element: <Analytics />,
+        element: (
+          <PrivateRouter>
+            <Analytics />
+          </PrivateRouter>
+        ),
       },
       {
         path: "all-products",
-        element: <AllProducts />,
+        element: (
+          <PrivateRouter>
+            <AllProducts />
+          </PrivateRouter>
+        ),
       },
       {
         path: "banner-info",
-        element: <BannerInformation />,
+        element: (
+          <PrivateRouter>
+            <BannerInformation />
+          </PrivateRouter>
+        ),
       },
       {
         path: "category",
-        element: <Category />,
+        element: (
+          <PrivateRouter>
+            <Category />
+          </PrivateRouter>
+        ),
       },
       {
         path: "feedback",
-        element: <Feedback />,
+        element: (
+          <PrivateRouter>
+            <Feedback />
+          </PrivateRouter>
+        ),
       },
       {
         path: "orders",
-        element: <Orders />,
+        element: (
+          <PrivateRouter>
+            <Orders />
+          </PrivateRouter>
+        ),
       },
       {
         path: "product-details",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRouter>
+            <ProductDetails />
+          </PrivateRouter>
+        ),
       },
       {
         path: "reported",
-        element: <Reported />,
+        element: (
+          <PrivateRouter>
+            <Reported />
+          </PrivateRouter>
+        ),
       },
       {
         path: "reported-details",
-        element: <ReportedView />,
+        element: (
+          <PrivateRouter>
+            <ReportedView />
+          </PrivateRouter>
+        ),
       },
       {
         path: "send-message",
-        element: <Message />,
+        element: (
+          <PrivateRouter>
+            <Message />
+          </PrivateRouter>
+        ),
       },
 
       {
         path: "sellers",
-        element: <Sellers />,
+        element: (
+          <PrivateRouter>
+            <Sellers />
+          </PrivateRouter>
+        ),
       },
       {
         path: "seller-details",
-        element: <SellerView />,
+        element: (
+          <PrivateRouter>
+            <SellerView />
+          </PrivateRouter>
+        ),
       },
       {
         path: "staff",
-        element: <Staff />,
+        element: (
+          <PrivateRouter>
+            <Staff />
+          </PrivateRouter>
+        ),
       },
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <PrivateRouter>
+            <Users />
+          </PrivateRouter>
+        ),
       },
       {
         path: "user-details",
-        element: <UserView />,
+        element: (
+          <PrivateRouter>
+            <UserView />
+          </PrivateRouter>
+        ),
       },
     ],
   },

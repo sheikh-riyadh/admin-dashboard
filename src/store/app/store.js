@@ -13,7 +13,7 @@ import {
   persistReducer,
 } from "redux-persist";
 import { baseApi } from "../api/baseApi";
-import userReducer from "../features/user/userSlice";
+import adminUserReducer from "../features/user/userSlice";
 import bannerReducer from "../features/banner/bannerSlice";
 import { imgbbApi } from "../service/imageUpload/imageUploadApi";
 
@@ -31,11 +31,11 @@ const sessionConfig = {
 };
 
 const rootPersistReducers = combineReducers({
-  userReducer,
+  bannerReducer,
 });
 
 const sessionReducers = combineReducers({
-  userReducer,
+  adminUserReducer,
   bannerReducer,
 });
 
