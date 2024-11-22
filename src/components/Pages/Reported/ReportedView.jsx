@@ -6,11 +6,12 @@ import UserDetailsRight from "../Users/UserPersonalInfo/UserDetailsRight";
 import UserImage from "../Users/UserPersonalInfo/UserImage";
 import { useGetSellerByIdQuery } from "../../../store/service/seller/sellerApi";
 import { FaFutbol } from "react-icons/fa6";
+import { smoothScroll } from "../../../utils/scrollToTop";
 
 const ReportedView = () => {
   const location = useLocation();
   const data = location?.state?.payload;
-
+  smoothScroll();
   const { data: sellerData, isLoading } = useGetSellerByIdQuery(
     data?.againstTo
   );

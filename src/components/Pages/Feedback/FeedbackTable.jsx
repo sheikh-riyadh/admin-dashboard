@@ -76,7 +76,7 @@ const FeedbackTable = () => {
                   return (
                     <div className="flex items-center gap-2">
                       <FeedbackView item={item} />
-                      <FeedbackDelete deleteId={item?._id} />
+                      {/* <FeedbackDelete deleteId={item?._id} /> */}
                     </div>
                   );
                 },

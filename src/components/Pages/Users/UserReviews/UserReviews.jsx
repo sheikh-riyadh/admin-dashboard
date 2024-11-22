@@ -1,6 +1,6 @@
-import UsersTable from "../UsersTable/UsersTable";
-
-const UserReviews = () => {
+import UserReviewTable from "./UserReviewTable";
+import PropTypes from "prop-types";
+const UserReviews = ({ userId }) => {
   return (
     <div className="bg-white flex flex-col shadow-md border rounded-md overflow-hidden">
       <div className="p-5 border-b">
@@ -9,10 +9,13 @@ const UserReviews = () => {
         </h2>
       </div>
       <div>
-        <UsersTable />
+        <UserReviewTable userId={userId} />
       </div>
     </div>
   );
 };
 
+UserReviews.propTypes = {
+  userId: PropTypes.string,
+};
 export default UserReviews;

@@ -26,8 +26,8 @@ const Users = () => {
             ))}
           </div>
           <div className="flex items-center gap-3 justify-end">
-            <Input placeholder="Search..." className="border bg-white w-full" />
-            <Button className="w-36">Find seller</Button>
+            <Input placeholder="search not available" className="border bg-white w-full" />
+            <Button className="w-36">Find user</Button>
           </div>
         </div>
         <div className="shadow-md border rounded-md overflow-hidden">

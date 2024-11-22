@@ -3,23 +3,31 @@ import { FaShop } from "react-icons/fa6";
 import AnalyticeCard from "../../components/Pages/Analytics/AnalyticeCard";
 import AnalyticGraph from "../../components/Pages/Analytics/AnalyticGraph";
 import CircleProgressbar from "../../components/Common/CircleProgressbar";
+import { useGetUserQuery } from "../../store/service/users/userApi";
+import { useGetAllSellerQuery } from "../../store/service/seller/sellerApi";
+import { useSellerProductQuery } from "../../store/service/product/productApi";
+import { numberWithCommas } from "../../utils/numberWithComma";
 
 const Analytics = () => {
+  const { data: userData } = useGetUserQuery("active");
+  const { data: sellerData } = useGetAllSellerQuery("active");
+  const { data: productData } = useSellerProductQuery();
+
   const data = [
     {
-      title: "100k",
+      title: numberWithCommas(userData?.length),
       subtitle: "Total Users",
       icon: <FaUsers className="text-4xl border rounded-full p-1" />,
       percentage: 0.33,
     },
     {
-      title: "350k",
+      title: numberWithCommas(sellerData?.length),
       subtitle: "Total Sellers",
       icon: <FaShop className="text-4xl border rounded-full p-1" />,
       percentage: 0.44,
     },
     {
-      title: "30k",
+      title: numberWithCommas(productData?.length),
       subtitle: "Total Products",
       icon: <FaShoppingBag className="text-4xl border rounded-full p-1" />,
       percentage: 0.44,
@@ -52,7 +60,7 @@ const Analytics = () => {
           </div>
           <div className="col-span-3 grid grid-cols-1 gap-5">
             <div className="bg-white rounded-md shadow-md border flex flex-col items-center justify-center p-5">
-              <CircleProgressbar title={"new visitor"} data={10}/>
+              <CircleProgressbar title={"new visitor"} data={10} />
             </div>
             <div className="bg-white rounded-md shadow-md border flex flex-col items-center justify-center p-5">
               <CircleProgressbar title={"new users"} data={20} />

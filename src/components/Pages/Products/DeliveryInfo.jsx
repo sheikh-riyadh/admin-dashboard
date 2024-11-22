@@ -6,7 +6,7 @@ const DeliveryInfo = ({ data }) => {
       <div className="flex flex-col gap-5">
         <Input
           key="warranty"
-          className="bg-white border rounded-full px-5"
+          className="bg-white border px-5"
           disabled
           label="Warranty"
           value={data?.warranty}
@@ -15,7 +15,7 @@ const DeliveryInfo = ({ data }) => {
           <Input
             label="Cash on Delivery"
             disabled
-            className="bg-white border rounded-full px-5"
+            className="bg-white border px-5"
             value={data?.cashOnDeliveryAvailable}
           />
         </div>
@@ -23,13 +23,13 @@ const DeliveryInfo = ({ data }) => {
           <Input
             label="Cash on Delivery"
             disabled
-            className="bg-white border rounded-full px-5"
+            className="bg-white border px-5"
             value={data?.returnProductAvailable}
           />
 
           {data?.returnProductAvailable === "yes" ? (
             <Input
-              className="bg-white border rounded-full px-5"
+              className="bg-white border px-5"
               label="Return Product Within ( x ) Days"
               disabled
               value={data?.returnDays}
@@ -38,7 +38,7 @@ const DeliveryInfo = ({ data }) => {
         </div>
         <div className="flex flex-col gap-3">
           <Input
-            className="bg-white border rounded-full px-5"
+            className="bg-white border px-5"
             label="Free Delivery"
             disabled
             value={data?.freeDeliveryAvailable}
@@ -46,7 +46,7 @@ const DeliveryInfo = ({ data }) => {
 
           {data?.freeDeliveryAvailable === "no" ? (
             <Input
-              className="bg-white border rounded-full px-5"
+              className="bg-white border px-5"
               label="Delivery Charge"
               disabled
               value={data?.deliveryCharge}

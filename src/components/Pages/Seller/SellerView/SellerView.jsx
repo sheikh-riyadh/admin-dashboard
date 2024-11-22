@@ -4,11 +4,13 @@ import Button from "../../../Common/Button";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { FaBookOpenReader } from "react-icons/fa6";
 import SellerPersonalInfo from "../SellerPersonalInfo/SellerPersonalInfo";
+import { smoothScroll } from "../../../../utils/scrollToTop";
 
 const SellerView = () => {
   const [tab, setTab] = useState(1);
   const location = useLocation();
   const data = location?.state?.payload;
+  smoothScroll()
 
   return (
     <div className="p-5 flex flex-col gap-5">

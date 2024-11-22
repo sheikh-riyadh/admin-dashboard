@@ -8,7 +8,11 @@ const bannerApi = baseApi.injectEndpoints({
       }),
       providesTags: ["admin-banner"],
     }),
-
+    sellerBanner: build.query({
+      query: (sellerId) => ({
+        url: `seller-banner/${sellerId}`,
+      }),
+    }),
     getDefaultBanner: build.query({
       query: () => ({
         url: `admin-default-banner`,
@@ -41,4 +45,5 @@ export const {
   useCreateBannerMutation,
   useUpdateBannerMutation,
   useGetDefaultBannerQuery,
+  useSellerBannerQuery,
 } = bannerApi;

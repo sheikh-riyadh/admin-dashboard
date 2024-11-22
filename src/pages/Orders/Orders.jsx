@@ -10,7 +10,7 @@ const Orders = () => {
         <div className="grid grid-cols-2">
           <span className="font-bold text-xl text-white">Orders Overview</span>
           <div className="flex items-center gap-3 justify-end">
-            <Input placeholder="Search..." className="border bg-white w-full" />
+            <Input placeholder="Search not available" className="border bg-white w-full" />
             <Button className="w-36">Find order</Button>
           </div>
         </div>

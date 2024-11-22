@@ -9,6 +9,11 @@ import SellerProducts from "../SellerProducts/SellerProducts";
 import SellerReview from "../SellerReviewInfo/SellerReview";
 import SellerLocation from "../SellerLocation/SellerLocation";
 const SellerPersonalInfo = ({ data }) => {
+  const sellerId = data?._id;
+  const identityData = {
+    type: data?.type,
+    identity: data?.identity,
+  };
   return (
     <div className="flex flex-col gap-5">
       <div className="grid grid-cols-12 gap-5">
@@ -16,17 +21,17 @@ const SellerPersonalInfo = ({ data }) => {
           <SellerLeftSide data={data} />
         </div>
         <div className="col-span-3 h-full">
-          <SellerImage data={data} />
+          <SellerImage data={data?.photo} />
         </div>
       </div>
       <div className="flex flex-col gap-5">
-        <BusinessInfo data={data}/>
-        <BannerInfo/>
-        <SellerOrders/>
-        <SellerIdentity/>
-        <SellerProducts/>
-        <SellerReview/>
-        <SellerLocation/>
+        <BusinessInfo data={data} />
+        <BannerInfo sellerId={sellerId} />
+        <SellerOrders sellerId={sellerId} />
+        <SellerIdentity identityData={identityData} />
+        <SellerProducts sellerId={sellerId} />
+        <SellerReview sellerId={sellerId} />
+        <SellerLocation sellerId={sellerId} />
       </div>
     </div>
   );

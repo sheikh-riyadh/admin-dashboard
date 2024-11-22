@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import Input from "../../Common/Input";
@@ -8,9 +10,11 @@ import {
 } from "../../../store/service/staff/staffApi";
 import toast from "react-hot-toast";
 import SubmitButton from "../../Common/SubmitButton";
-import { useEffect } from "react";
+import { auth } from "../../../firebase/firebase.config";
 
 const StaffForm = ({ updateData, setIsModalOpen }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { handleSubmit, register, setValue } = useForm({
     defaultValues: {
       name: "",
@@ -19,6 +23,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
       role: "admin",
     },
   });
+
   const [createStaff, { isLoading: staffCreateLoading }] =
     useCreateStaffMutation();
   const [updateStaff, { isLoading: updateStaffLoading }] =
@@ -41,17 +46,33 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
       }
     } else {
       try {
-        const result = await createStaff(data);
-        if (result?.error) {
-          toast.error(result?.error?.data.message, {
-            id: "create_staff_error",
-          });
-        } else {
-          toast.success(result.data?.message, { id: "success" });
-          setIsModalOpen(false);
+        const result = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+        if (result?.user?.accessToken && result.user.email) {
+          const res = await createStaff(data);
+          if (res?.error) {
+            toast.error(res?.error?.data.message, {
+              id: "create_staff_error",
+            });
+          } else {
+            toast.success(res.data?.message, { id: "success" });
+            setIsModalOpen(false);
+          }
         }
       } catch (error) {
-        toast.error("Something went wrong 😓", { id: `${error}` });
+        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+          toast.error(`Email ${data?.email} already used`, {
+            id: "email_error",
+          });
+        } else {
+          toast.error("Something went wrong please try again letter", {
+            id: "try_again_letter",
+          });
+        }
+        setIsLoading(false);
       }
     }
   };
@@ -64,7 +85,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
         }
       }
     }
-  }, [updateData,setValue]);
+  }, [updateData, setValue]);
 
   return (
     <div>
@@ -80,12 +101,16 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           label={"Email"}
           placeholder={"Staff email"}
           required
+          disabled={updateData}
+          value={updateData ? updateData?.email : undefined}
         />
         <Input
           {...register("password")}
           label={"Password"}
           placeholder={"Staff Password"}
           required
+          disabled={updateData}
+          value={updateData ? updateData?.password : undefined}
         />
         <SelectInput
           defaultValue={"admin"}
@@ -98,7 +123,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           <option value="editor">Editor</option>
         </SelectInput>
         <SubmitButton
-          isLoading={staffCreateLoading || updateStaffLoading}
+          isLoading={staffCreateLoading || updateStaffLoading || isLoading}
           className="mt-5"
         >
           Save

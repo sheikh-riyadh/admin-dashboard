@@ -1,6 +1,7 @@
-import UsersTable from "../../Users/UsersTable/UsersTable";
+import SellerProductTable from "./SellerProductTable";
+import PropTypes from "prop-types";
 
-const SellerProducts = () => {
+const SellerProducts = ({ sellerId }) => {
   return (
     <div className="bg-white flex flex-col shadow-md border rounded-md overflow-hidden">
       <div className="p-5">
@@ -9,10 +10,13 @@ const SellerProducts = () => {
         </h2>
       </div>
       <div>
-        <UsersTable />
+        <SellerProductTable sellerId={sellerId} />
       </div>
     </div>
   );
 };
 
+SellerProducts.propTypes = {
+  sellerId: PropTypes.string,
+};
 export default SellerProducts;

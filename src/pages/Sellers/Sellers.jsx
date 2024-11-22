@@ -26,7 +26,7 @@ const Sellers = () => {
             ))}
           </div>
           <div className="flex items-center gap-3 justify-end">
-            <Input placeholder="Search..." className="border bg-white w-full" />
+            <Input placeholder="Search not available" className="border bg-white w-full" />
             <Button className="w-36">Find seller</Button>
           </div>
         </div>

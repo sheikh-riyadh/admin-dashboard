@@ -4,15 +4,17 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
 import Button from "../../../Common/Button";
 import UserPersonalInfo from "../UserPersonalInfo/UserPersonalInfo";
+import { smoothScroll } from "../../../../utils/scrollToTop";
 
 const UserView = () => {
   const [tab, setTab] = useState(1);
   const location = useLocation();
   const data = location?.state?.payload;
+  smoothScroll();
 
   return (
     <div className="p-5 flex flex-col gap-5">
-      <div >
+      <div>
         <div className="flex justify-between items-center bg-white shadow-md border rounded-md py-3 px-5">
           <h1 className="font-bold text-xl capitalize">{data?.role} Profile</h1>
           <div className="flex items-center gap-5">

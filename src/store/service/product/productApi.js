@@ -8,6 +8,12 @@ const productApi = baseApi.injectEndpoints({
       }),
       providesTags: ["products"],
     }),
+    productBySellerId: build.query({
+      query: (sellerId) => ({
+        url: `seller-product-by-id/${sellerId}`,
+      }),
+      providesTags: ["products"],
+    }),
     updateProductStatus: build.mutation({
       query: (data) => ({
         url: "update-product-status",
@@ -19,5 +25,8 @@ const productApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useSellerProductQuery, useUpdateProductStatusMutation } =
-  productApi;
+export const {
+  useSellerProductQuery,
+  useUpdateProductStatusMutation,
+  useProductBySellerIdQuery,
+} = productApi;

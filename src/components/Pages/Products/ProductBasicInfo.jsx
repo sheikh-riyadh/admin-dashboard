@@ -17,7 +17,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Video URL"}
-          className={"bg-white border rounded-full px-5"}
+          className={"bg-white border px-5"}
           value={data?.videoURL ? data?.videoURL : "N/A"}
           disabled
         />
@@ -25,7 +25,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Title"}
-          className={"bg-white border rounded-full px-5"}
+          className={"bg-white border px-5"}
           value={data?.title}
           disabled
         />
@@ -34,7 +34,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Category"}
-          className={"bg-white border rounded-full px-5"}
+          className={"bg-white border px-5"}
           value={data?.category}
           disabled
         />
@@ -42,7 +42,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Brand"}
-          className={"bg-white border rounded-full px-5"}
+          className={"bg-white border px-5"}
           value={data?.brand}
           disabled
         />
@@ -54,7 +54,7 @@ const ProductBasicInfo = ({ data }) => {
           {data?.keyFeatures?.map((feature) => (
             <div
               key={feature}
-              className="px-2 flex items-center gap-2 border rounded-full bg-stech text-white"
+              className="px-2 flex items-center gap-2 border rounded-md bg-stech text-white"
             >
               <span className="text-sm">{feature}</span>
             </div>

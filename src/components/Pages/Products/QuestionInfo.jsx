@@ -4,9 +4,8 @@ import { FaCommentAlt, FaFutbol } from "react-icons/fa";
 import { RiMessage2Fill, RiQuestionnaireFill } from "react-icons/ri";
 import { useProductQuestionsQuery } from "../../../store/service/question/productQuestionApi";
 
-const QuestionCard = ({ data }) => {
-  const { data: questionData, isLoading } = useProductQuestionsQuery(data?._id);
-  console.log(questionData);
+const QuestionCard = ({ productId }) => {
+  const { data: questionData, isLoading } = useProductQuestionsQuery(productId);
   return (
     <div className="bg-white border rounded-md shadow-md overflow-hidden p-5">
       {!isLoading ? (
@@ -76,7 +75,7 @@ const QuestionCard = ({ data }) => {
 };
 
 QuestionCard.propTypes = {
-  data: PropTypes.object,
+  productId: PropTypes.string,
 };
 
 export default QuestionCard;

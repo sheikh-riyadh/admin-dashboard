@@ -83,12 +83,12 @@ const ReportedTable = () => {
                       >
                         <FaStreetView />
                       </span>
-                      <span
+                      {/* <span
                         className="text-danger cursor-pointer border border-danger text-center p-2 rounded-full hover:bg-red-300 hover:text-white duration-300"
                         title="Delete"
                       >
                         <FaTrash />
-                      </span>
+                      </span> */}
                     </div>
                   );
                 },

@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { FaClipboard, FaFutbol } from "react-icons/fa";
 import { useProductReviewQuery } from "../../../store/service/review/reviewApi";
 import ReviewCard from "./ReviewCard";
-const Reviews = ({ data }) => {
-  const { data: reviewData, isLoading } = useProductReviewQuery(data?._id);
+const Reviews = ({ productId }) => {
+  const { data: reviewData, isLoading } = useProductReviewQuery(productId);
 
   return (
     <>
@@ -35,7 +35,7 @@ const Reviews = ({ data }) => {
 };
 
 Reviews.propTypes = {
-  data: PropTypes.object,
+  productId: PropTypes.string,
 };
 
 export default Reviews;

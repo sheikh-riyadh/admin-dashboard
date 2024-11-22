@@ -76,7 +76,7 @@ const SellerTable = ({ status }) => {
                       >
                         <FaStreetView />
                       </span>
-                      <span
+                      {/* <span
                         onClick={() => {
                           setSellerId(item?._id),
                             setIsModalOpen((prev) => !prev);
@@ -85,7 +85,7 @@ const SellerTable = ({ status }) => {
                         title="Delete"
                       >
                         <FaTrash />
-                      </span>
+                      </span> */}
                     </div>
                   );
                 },
