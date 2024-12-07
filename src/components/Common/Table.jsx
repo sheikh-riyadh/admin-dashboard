@@ -16,18 +16,18 @@ const Table = ({ columns, tableData, className }) => {
   }, [tableData]);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto custom-bar">
       {data?.length ? (
         <table
-          className={cn(`min-w-full bg-white rounded-lg shadow-md`, className)}
+          className={cn(`min-w-full bg-widget rounded-lg shadow-md`, className)}
         >
-          <thead className="bg-gray-200">
-            <tr>
+          <thead className="bg-widget">
+            <tr className="text-chart_2">
               <th className="p-4">
                 <span>SN</span>
               </th>
               {columns?.map((column, index) => (
-                <th key={index} className="p-4 text-left hover:bg-gray-300">
+                <th key={index} className="p-4 text-left">
                   <div className="flex items-center justify-between">
                     <span className="whitespace-nowrap">{column.name}</span>{" "}
                   </div>
@@ -37,15 +37,15 @@ const Table = ({ columns, tableData, className }) => {
           </thead>
           <tbody
             className={cn(
-              `text-gray-600 text-sm font-light bg-white`,
+              `text-white text-sm font-light bg-widget`,
               className
             )}
           >
             {data?.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="p-4 border-t text-center">{index + 1}</td>
+              <tr key={index} className="">
+                <td className="p-4 border-t text-center border-[#171f12]">{index + 1}</td>
                 {columns?.map((column, index) => (
-                  <td key={index} className="p-4 border-t">
+                  <td key={index} className="p-4 border-t border-[#171f12]">
                     {column?.render ? (
                       <column.render item={item} />
                     ) : (
@@ -71,9 +71,9 @@ const Table = ({ columns, tableData, className }) => {
           </tbody>
         </table>
       ) : (
-        <div className="flex gap-5 flex-col items-center justify-center w-full h-80 bg-white">
-          <FaClipboard className="text-8xl text-slate" />
-          <span className="font-medium text-xl text-danger capitalize">
+        <div className="flex gap-5 flex-col items-center justify-center w-full h-80 bg-widget">
+          <FaClipboard className="text-8xl text-white" />
+          <span className="font-medium text-xl text-accent capitalize">
             No data found
           </span>
         </div>

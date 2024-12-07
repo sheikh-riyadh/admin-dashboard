@@ -21,14 +21,13 @@ input::-webkit-inner-spin-button {
 
 /* Handle */
 
-
 /* Track */
 .custom-bar::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
 
 .custom-bar::-webkit-scrollbar-thumb {
-  background: var(--stech);
+  background: var(--chart-2);
 }
 .custom-bar::-webkit-scrollbar {
   width: 10px;
@@ -41,7 +40,6 @@ input::-webkit-inner-spin-button {
 
 /* Apply the zoom-in animation to an element */
 .zoom-in-element {
-  
   animation: zoomIn 0.5s ease forwards;
 }
 
@@ -70,23 +68,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-
-
-.circle-progressbar::before{
+.circle-progressbar::before {
   content: "";
   position: absolute;
   width: 100px;
   height: 100px;
-  background: var(--white);
+  background: var(--widget);
   border-radius: 50%;
 }
-
-
-
-
-
-
-
 
 /* Firefox */
 input[type="number"] {
@@ -150,6 +139,13 @@ body {
   --black: #222325;
   --slate: #6c757d;
   --stech: #081621;
-  background-color: #f1f5f9;
+  --widget: #1f2e2c;
+  --widget_title_background: #1f2d2d;
+  --primary-text: #e7f9f7;
+  --secondar-text: #8de2db;
+  --accent: #abd006;
+  --chart-1: #fcff66;
+  --chart-2: #047857;
+  background-color: #171f12;
   color: var(--black);
 }

@@ -11,8 +11,11 @@ import {
   useUpdateCategoryMutation,
 } from "../../../store/service/category/categoryApi";
 import PropTypes from "prop-types";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
 const CategoryForm = ({ setIsModalOpen, updateData }) => {
+  const { admin } = useGetAdmin();
+
   const [image, setImage] = useState();
   const [uploadImage, { isLoading }] = useUploadImageMutation();
 
@@ -49,7 +52,10 @@ const CategoryForm = ({ setIsModalOpen, updateData }) => {
     }
     if (!updateData?._id) {
       try {
-        const res = await createCategory({ ...data, image });
+        const res = await createCategory({
+          data: { ...data, image },
+          email: admin?.email,
+        });
         if (!res?.error) {
           toast.success("Category created successfully", { id: "success" });
           setIsModalOpen(false);
@@ -66,6 +72,7 @@ const CategoryForm = ({ setIsModalOpen, updateData }) => {
         const res = await updateCategory({
           _id: updateData?._id,
           data: { ...data, image },
+          email: admin?.email,
         });
         if (!res?.error) {
           toast.success("Updated category successfully", { id: "success" });
@@ -99,6 +106,7 @@ const CategoryForm = ({ setIsModalOpen, updateData }) => {
           label={"Name"}
           placeholder={"Category Name"}
           required
+          className="bg-[#1C2822] text-white rounded-sm"
         />
         <div className={"h-44 w-full"}>
           <label
@@ -106,7 +114,7 @@ const CategoryForm = ({ setIsModalOpen, updateData }) => {
             className="rounded-full inline-block my-1 w-full"
           >
             <div
-              className={`h-44 w-full border-2 border-stech border-dotted rounded-md relative flex flex-col items-center justify-center cursor-pointer overflow-hidden ${
+              className={`h-44 w-full bg-[#1c2822] rounded-md relative flex flex-col items-center justify-center cursor-pointer overflow-hidden ${
                 isLoading && "cursor-wait"
               }`}
             >
@@ -117,15 +125,15 @@ const CategoryForm = ({ setIsModalOpen, updateData }) => {
                   className="h-full w-full object-fill rounded-md"
                 />
               ) : (
-                <p className="flex flex-col gap-1 items-center justify-center font-medium text-stech w-full h-full bg-sky-100">
-                  <FaUpload />
-                  <span>Click to upload</span>
+                <p className="flex flex-col gap-1 items-center justify-center font-medium w-full h-full bg-[#1c2822]">
+                  <FaUpload className="text-chart_2" />
+                  <span className="text-white">Click to upload</span>
                 </p>
               )}
 
               {isLoading && (
-                <div className="absolute h-full w-full rounded bg-white flex items-center justify-center">
-                  <ImSpinner9 className="animate-spin text-stech text-4xl" />
+                <div className="absolute h-full w-full rounded bg-widget flex items-center justify-center">
+                  <ImSpinner9 className="animate-spin text-white text-4xl" />
                 </div>
               )}
             </div>

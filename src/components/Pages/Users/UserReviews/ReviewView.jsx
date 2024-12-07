@@ -13,7 +13,7 @@ const ReviewView = ({ item }) => {
         <span
           title="Review Overview"
           onClick={() => setIsView((prev) => !prev)}
-          className="text-stech cursor-pointer border border-stech text-center p-2 rounded-full"
+          className="text-chart_2 cursor-pointer border border-chart_2 text-center p-2 rounded-full"
         >
           <FaBinoculars />
         </span>
@@ -25,16 +25,16 @@ const ReviewView = ({ item }) => {
           onClose={setIsView}
           title={"Review overview"}
           key={"order_manage"}
-          className={"w-[400px]"}
+          className={"w-[350px] h-[300px] xl:w-[400px]"}
         >
           <div className="flex flex-col gap-10">
             <div className="flex items-center gap-1">
               {[...Array(item?.rating?.rating).keys()]?.map((rating) => (
-                <FaStar key={rating} className="text-stech" />
+                <FaStar key={rating} className="text-accent" />
               ))}
             </div>
 
-            <div className="border h-32 rounded-md p-3">
+            <div className="h-32 rounded-md p-3 bg-widget">
               <span>{item?.reviewMessage}</span>
             </div>
           </div>

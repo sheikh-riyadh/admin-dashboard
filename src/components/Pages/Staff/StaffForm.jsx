@@ -11,9 +11,11 @@ import {
 import toast from "react-hot-toast";
 import SubmitButton from "../../Common/SubmitButton";
 import { auth } from "../../../firebase/firebase.config";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
 const StaffForm = ({ updateData, setIsModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { admin } = useGetAdmin();
 
   const { handleSubmit, register, setValue } = useForm({
     defaultValues: {
@@ -33,7 +35,11 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
     setIsLoading(true);
     if (updateData) {
       try {
-        const result = await updateStaff({ _id: updateData?._id, data: data });
+        const result = await updateStaff({
+          _id: updateData?._id,
+          data: data,
+          adminEmail: admin?.email,
+        });
         if (result?.error) {
           toast.error(result?.error?.data.message, {
             id: "update_staff_error",
@@ -55,7 +61,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           data.password
         );
         if (result?.user?.accessToken && result.user.email) {
-          const res = await createStaff(data);
+          const res = await createStaff({ ...data, adminEmail: admin?.email });
           if (res?.error) {
             toast.error(res?.error?.data.message, {
               id: "create_staff_error",
@@ -101,6 +107,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           label={"Name"}
           placeholder={"Staff name"}
           required
+          className="bg-[#1C2822] text-white rounded-sm"
         />
         <Input
           {...register("email")}
@@ -109,14 +116,26 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           required
           disabled={updateData}
           value={updateData ? updateData?.email : undefined}
+          className="bg-[#1C2822] text-white rounded-sm"
         />
-        {!updateData ? (
+        {updateData && admin?.role === "super_admin" ? (
           <Input
             {...register("password")}
             label={"Password"}
             placeholder={"Staff Password"}
             required
             type="password"
+            className="bg-[#1C2822] text-white rounded-sm"
+            value={updateData ? updateData?.password : undefined}
+          />
+        ) : !updateData ? (
+          <Input
+            {...register("password")}
+            label={"Password"}
+            placeholder={"Staff Password"}
+            required
+            type="password"
+            className="bg-[#1C2822] text-white rounded-sm"
           />
         ) : null}
         <SelectInput
@@ -124,6 +143,7 @@ const StaffForm = ({ updateData, setIsModalOpen }) => {
           {...register("role")}
           label={"Select Staff role"}
           required
+          className="bg-[#1C2822] text-white rounded-sm"
         >
           <option value="admin">Admin</option>
           <option disabled>{`Moderator (Working..)`}</option>

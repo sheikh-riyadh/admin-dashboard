@@ -13,13 +13,14 @@ const FeedbackView = ({ item }) => {
     photo: item?.user?.photo,
     role: item?.user?.role,
     status: item?.user?.status,
+    email:item?.user?.email
   };
 
   return (
     <>
       <span
         onClick={() => setIsModalOpen((prev) => !prev)}
-        className="cursor-pointer border text-stech border-stech text-center p-2 rounded-full  duration-300"
+        className="cursor-pointer border text-chart_2 border-chart_2 text-center p-2 rounded-full  duration-300"
         title="Delete"
       >
         <FaStreetView />
@@ -33,20 +34,20 @@ const FeedbackView = ({ item }) => {
             title={"Feedback"}
           >
             <div className="flex flex-col gap-5">
-              <div className="grid grid-cols-12 gap-5">
-                <div className="col-span-3">
+              <div className="grid xl:grid-cols-12 gap-5">
+                <div className="xl:col-span-3">
                   <UserImage data={item?.user?.photo} />
                 </div>
-                <div className="col-span-9">
+                <div className="xl:col-span-9">
                   <UserDetailsRight data={newData} />
                 </div>
               </div>
-              <div className="shadow-md rounded-md border bg-white p-5 flex flex-col gap-5">
+              <div className="shadow-md rounded-md bg-widget p-5 flex flex-col gap-5">
                 <span className="font-bold">Feedback info </span>
-                <div className="border p-5 rounded-md text-lg flex flex-col gap-5">
+                <div className=" bg-[#1c2822] p-5 rounded-md text-lg flex flex-col gap-5">
                   <div className="flex items-center gap-4">
                     <p className="font-bold">Feedback type: </p>
-                    <span className="border px-4 rounded-full bg-danger text-white">
+                    <span className="border px-4 rounded-full bg-accent text-black font-bold">
                       {item?.feedbackType}
                     </span>
                   </div>

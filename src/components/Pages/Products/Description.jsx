@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 const Description = ({ data }) => {
   return (
-    <div className="border rounded-b-md bg-white shadow-md p-3">
+    <div className="shadow-md p-3 bg-widget text-white rounded-b-md">
       <div dangerouslySetInnerHTML={{ __html: data?.description }}></div>
     </div>
   );

@@ -3,8 +3,8 @@ import { baseApi } from "../../api/baseApi";
 const adminMessageApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminMessage: build.query({
-      query: () => ({
-        url: `admin-message`,
+      query: (data) => ({
+        url: `admin-message?${data}`,
       }),
       providesTags: ["admin-message"],
     }),
@@ -28,8 +28,8 @@ const adminMessageApi = baseApi.injectEndpoints({
     }),
 
     deleteAdminMessage: build.mutation({
-      query: (id) => ({
-        url: `admin-delete-message/${id}`,
+      query: (data) => ({
+        url: `admin-delete-message?${data}`,
         method: "DELETE",
       }),
       invalidatesTags: ["admin-message"],

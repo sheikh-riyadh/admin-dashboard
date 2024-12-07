@@ -3,10 +3,24 @@ import { baseApi } from "../../api/baseApi";
 const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getUser: build.query({
-      query: (status) => ({
-        url: `user/${status}`,
+      query: (data) => ({
+        url: `user?${data}`,
       }),
       providesTags: ["user"],
+    }),
+    createJwt: build.mutation({
+      query: (data) => ({
+        url: "jwt",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
+    logout: build.query({
+      query: () => ({
+        url: `logout`,
+      }),
+      invalidatesTags: ["user"],
     }),
     updateUserStatus: build.mutation({
       query: (data) => ({
@@ -14,9 +28,14 @@ const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags:["user"]
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
-export const { useGetUserQuery, useUpdateUserStatusMutation } = userApi;
+export const {
+  useGetUserQuery,
+  useUpdateUserStatusMutation,
+  useCreateJwtMutation,
+  useLogoutQuery,
+} = userApi;

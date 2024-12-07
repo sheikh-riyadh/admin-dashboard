@@ -3,8 +3,15 @@ import PropTypes from "prop-types";
 import { FaTrash } from "react-icons/fa";
 import { useDeleteStaffMutation } from "../../../store/service/staff/staffApi";
 import DeleteModal from "../../Modal/DeleteModal";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
 const DeleteStaff = ({ deleteId }) => {
+  const { admin } = useGetAdmin();
+  const query = new URLSearchParams({
+    id: deleteId,
+    email: admin?.email,
+  }).toString();
+
   const [deleteStaff, { isLoading }] = useDeleteStaffMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +26,7 @@ const DeleteStaff = ({ deleteId }) => {
       </span>
       <div>
         <DeleteModal
-          deleteId={deleteId}
+          deleteId={query}
           handleDeleteFunction={deleteStaff}
           isLoading={isLoading}
           isModalOpen={isModalOpen}

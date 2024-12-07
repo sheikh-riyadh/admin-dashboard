@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { checkValues } from "../../utils/checkValues";
 import { handleSetImage } from "../../store/features/banner/bannerSlice";
+import { useGetAdmin } from "../../hooks/useGetAdmin";
 
 const BannerInformation = () => {
   const [type, setType] = useState("image");
@@ -31,8 +32,14 @@ const BannerInformation = () => {
   const dispatch = useDispatch();
   const { images } = useSelector((state) => state.session.bannerReducer.value);
 
-  const { data: bannerData } = useGetBannerQuery(type);
-  const { data: defaultBannerData } = useGetDefaultBannerQuery();
+  const { admin } = useGetAdmin();
+  const query = new URLSearchParams({
+    type,
+    email: admin?.email,
+  }).toString();
+
+  const { data: bannerData } = useGetBannerQuery(query);
+  const { data: defaultBannerData } = useGetDefaultBannerQuery(admin?.email);
   const [createBanner, { isLoading }] = useCreateBannerMutation();
   const [updateBanner, { isLoading: updateLoading }] =
     useUpdateBannerMutation();
@@ -53,7 +60,7 @@ const BannerInformation = () => {
     }
 
     if (!bannerData?._id) {
-      const res = await createBanner(newData);
+      const res = await createBanner({ data: newData, email: admin?.email });
       if (!res?.error) {
         toast.success("Banner created successfully", { id: "success" });
       } else {
@@ -65,6 +72,7 @@ const BannerInformation = () => {
         const res = await updateBanner({
           _id: bannerData?._id,
           data: { ...newData },
+          email: admin?.email,
         });
         if (!res?.error) {
           toast.success("Updated banner successfully");
@@ -85,12 +93,9 @@ const BannerInformation = () => {
     }
   };
 
-
-  useEffect(()=>{
-    setType(defaultBannerData?.type)
-  },[defaultBannerData])
-
-
+  useEffect(() => {
+    setType(defaultBannerData?.type);
+  }, [defaultBannerData]);
 
   useEffect(() => {
     reset();
@@ -107,13 +112,12 @@ const BannerInformation = () => {
   }, [bannerData, setValue, reset, dispatch]);
 
   return (
-    <div className="pb-8">
-      <div className="h-44 w-full bg-primary flex flex-col justify-center items-center"></div>
-      <div className="-mt-32">
+    <div className="py-5">
+      <div>
         <span className="font-bold text-xl text-white p-5">Add Banner</span>
-        <div className="bg-white border shadow-md p-5 m-5 rounded-md">
+        <div className="bg-widget shadow-md p-5 m-5 rounded-md">
           <div className="mb-10">
-            <p className=" text-xl font-semibold text-blue">
+            <p className=" text-xl font-semibold text-white">
               Which one you set as a cover?
             </p>
             <div className="flex items-center justify-start mt-4 gap-x-4">
@@ -121,11 +125,11 @@ const BannerInformation = () => {
                 <Button
                   onClick={() => setType(option)}
                   key={option}
-                  className="flex items-center gap-2 cursor-pointer bg-transparent border-none  text-black w-20"
+                  className="flex items-center gap-2 cursor-pointer bg-transparent border-none  w-24 text-white"
                 >
                   <div
                     className={`w-4 h-4 rounded-full border duration-300 ${
-                      type == option && "bg-secondary"
+                      type == option && "bg-accent"
                     }`}
                   ></div>
                   <span className="capitalize">{option}</span>
@@ -143,14 +147,14 @@ const BannerInformation = () => {
               required={true}
               placeholder="Enter title"
               {...register("title")}
-              className={"bg-transparent border"}
+              className={"bg-[#1C2822] text-white rounded-sm"}
             />
             <TextArea
               label={"Description"}
               placeholder="Enter description"
               required={true}
               {...register("description")}
-              className={"bg-transparent border h-36"}
+              className={"bg-[#1C2822] text-white rounded-sm h-36"}
             />
             {type == "image" ? (
               <ImageUpload />

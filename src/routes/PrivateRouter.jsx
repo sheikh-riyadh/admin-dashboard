@@ -1,15 +1,15 @@
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useGetUser } from "../hooks/useGetUser";
+import { useGetAdmin } from "../hooks/useGetAdmin";
 
 const PrivateRouter = ({ children }) => {
-  const { user } = useGetUser();
+  const { admin } = useGetAdmin();
 
   const location = useLocation();
 
   if (
-    (user?.role === "admin" || user?.role === "super_admin") &&
-    user?.status == "active"
+    (admin?.role === "admin" || admin?.role === "super_admin") &&
+    admin?.status == "active"
   ) {
     return children;
   } else {

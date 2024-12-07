@@ -16,9 +16,9 @@ const LeftSide = () => {
       <div
         className={`${
           isExtend ? "w-60" : "w-14"
-        } h-screen overflow-y-auto border border-t-0 bar-hidden duration-300`}
+        } h-screen overflow-y-auto bar-hidden duration-300`}
       >
-        <div className="border-b sticky top-0 bg-white">
+        <div className="sticky top-0 bg-widget">
           <div className="w-44 h-[60px] flex flex-col items-center justify-center">
             <img
               className="object-fill px-3"
@@ -30,10 +30,10 @@ const LeftSide = () => {
         <div className="flex flex-col gap-2 h-full">
           {layout.left_side.map(({ name, icon, link }) => (
             <Link
-              className={`flex items-center gap-3 ${
+              className={`flex items-center gap-3 text-white ${
                 !isExtend && "gap-6 py-3"
               } px-4 py-2 duration-200 text-sm text-slate ${
-                pathname == link ? "bg-stech text-white" : ""
+                pathname == link ? "bg-chart_2 text-white" : ""
               }`}
               to={`${link}`}
               title={name}
@@ -47,12 +47,12 @@ const LeftSide = () => {
       </div>
       <div
         onClick={handleArrow}
-        className="absolute top-[73px] -right-[10px] w-6 h-6 bg-white rounded-full border flex items-center justify-center z-40 cursor-pointer"
+        className="absolute top-[73px] -right-[10px] w-6 h-6 bg-accent rounded-full border flex items-center justify-center z-40 cursor-pointer"
       >
         {isExtend ? (
-          <FaAngleLeft className="text-lg" />
+          <FaAngleLeft className="text-lg text-white" />
         ) : (
-          <FaAngleRight className="text-lg" />
+          <FaAngleRight className="text-lg text-white" />
         )}
       </div>
     </div>

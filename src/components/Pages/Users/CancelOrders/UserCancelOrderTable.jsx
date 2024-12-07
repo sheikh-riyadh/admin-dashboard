@@ -84,7 +84,7 @@ const UserCancelOrderTable = ({ userId }) => {
                       {numberWithCommas(
                         item?.productsInfo?.reduce((total, item) => {
                           return (total += item?.buyQnt * item?.price);
-                        }, 0) + parseInt(item?.deliveryCharge)
+                        }, 0) + parseInt( item?.deliveryCharge ? item?.deliveryCharge : 0)
                       )}
                       TK
                     </span>
@@ -105,9 +105,9 @@ const UserCancelOrderTable = ({ userId }) => {
           ]}
         />
       ) : (
-        <div className="flex flex-col gap-1 items-center justify-center h-screen bg-white">
-          <FaFutbol className="animate-spin text-6xl" />
-          <span>Loading...</span>
+        <div className="flex flex-col gap-1 items-center justify-center h-screen bg-widget">
+          <FaFutbol className="animate-spin text-6xl text-white" />
+          <span className="text-accent">Loading...</span>
         </div>
       )}
     </div>

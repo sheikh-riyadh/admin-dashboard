@@ -6,11 +6,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { addUser } from "../../store/features/user/userSlice";
+import { addAdmin } from "../../store/features/user/adminSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import SubmitButton from "../../components/Common/SubmitButton";
 import { useLazyGetAdminQuery } from "../../store/service/staff/staffApi";
+import { useCreateJwtMutation } from "../../store/service/users/userApi";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,15 +21,17 @@ const Login = () => {
 
   const { handleSubmit, register } = useForm();
   const [getAdmin] = useLazyGetAdminQuery();
+  const [createJwt, { isLoading: jwtLoading }] = useCreateJwtMutation();
 
   const handleLogin = async ({ email, password }) => {
     setIsLoading(true);
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       if (result?.user?.accessToken && result.user.email) {
+        await createJwt({ email: result.user.email });
         const res = await getAdmin(result.user.email);
         if (res?.data?.email) {
-          dispatch(addUser({ ...res?.data }));
+          dispatch(addAdmin({ ...res?.data }));
           setIsLoading(false);
           navigate("/");
         } else {
@@ -75,7 +78,10 @@ const Login = () => {
               />
             </div>
 
-            <SubmitButton isLoading={isLoading} className="bg-emerald-700">
+            <SubmitButton
+              isLoading={isLoading || jwtLoading}
+              className="bg-emerald-700"
+            >
               Sign In
             </SubmitButton>
           </form>

@@ -3,15 +3,15 @@ import { useGetAllStaffQuery } from "../../../store/service/staff/staffApi";
 import Table from "../../Common/Table";
 import UpdateStaff from "./UpdateStaff";
 import DeleteStaff from "./DeleteStaff";
-import { useGetUser } from "../../../hooks/useGetUser";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
 const StaffTable = () => {
-  const { user } = useGetUser();
-  const { data, isLoading } = useGetAllStaffQuery(user?.email);
+  const { admin } = useGetAdmin();
+  const { data, isLoading } = useGetAllStaffQuery(admin?.email);
 
   return (
     <div>
-      <div className="border rounded-md shadow-md">
+      <div className="rounded-md shadow-md">
         {!isLoading ? (
           <Table
             className="font-normal"
@@ -52,9 +52,9 @@ const StaffTable = () => {
             ]}
           />
         ) : (
-          <div className="flex flex-col gap-5 items-center justify-center h-80 bg-white">
-            <ImSpinner9 className="text-6xl animate-spin" />
-            <span className="font-medium">Loading...</span>
+          <div className="flex flex-col gap-5 items-center justify-center h-screen bg-widget">
+            <ImSpinner9 className="text-6xl animate-spin text-white" />
+            <span className="font-medium text-accent">Loading...</span>
           </div>
         )}
       </div>

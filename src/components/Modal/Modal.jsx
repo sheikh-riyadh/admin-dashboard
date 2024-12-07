@@ -37,16 +37,16 @@ const Modal = ({
     >
       <div
         className={cn(
-          "bg-white rounded-lg p-5 shadow-lg  overflow-y-auto custom-bar",
+          "bg-[#171f12] rounded-lg p-5 shadow-lg  overflow-y-auto custom-bar border",
           className
         )}
       >
         <div className="flex flex-col gap-5">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-white">
             <span className="font-bold">{title}</span>
             <FaCircleXmark
               onClick={() => onClose()}
-              className="text-2xl text-danger duration-300 cursor-pointer"
+              className="text-2xl text-accent duration-300 cursor-pointer"
             />
           </div>
           <div>{children}</div>

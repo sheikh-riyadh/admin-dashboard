@@ -3,23 +3,22 @@ import { baseApi } from "../../api/baseApi";
 const bannerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getBanner: build.query({
-      query: (type) => ({
-        url: `admin-banner/${type}`,
+      query: (data) => ({
+        url: `admin-banner?${data}`,
       }),
       providesTags: ["admin-banner"],
     }),
     sellerBanner: build.query({
-      query: (sellerId) => ({
-        url: `seller-banner/${sellerId}`,
+      query: (data) => ({
+        url: `seller-banner?${data}`,
       }),
     }),
     getDefaultBanner: build.query({
-      query: () => ({
-        url: `admin-default-banner`,
+      query: (email) => ({
+        url: `admin-default-banner/${email}`,
       }),
       providesTags: ["admin-banner"],
     }),
-
     createBanner: build.mutation({
       query: (data) => ({
         url: `admin-create-banner`,
@@ -28,7 +27,6 @@ const bannerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["admin-banner"],
     }),
-
     updateBanner: build.mutation({
       query: (data) => ({
         url: "admin-update-banner",

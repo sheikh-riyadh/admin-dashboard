@@ -3,19 +3,19 @@ import { baseApi } from "../../api/baseApi";
 const orderApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getOrders: build.query({
-      query: () => ({
-        url: "user-order",
+      query: (data) => ({
+        url: `user-order?${data}`,
       }),
       providesTags: ["order"],
     }),
     orderBySellerId: build.query({
-      query: (sellerId) => ({
-        url: `order-by-sellerId/${sellerId}`,
+      query: (data) => ({
+        url: `order-by-sellerId?${data}`,
       }),
     }),
     orderByUserId: build.query({
-      query: (userId) => ({
-        url: `order-by-userId/${userId}`,
+      query: (data) => ({
+        url: `order-by-userId?${data}`,
       }),
       providesTags: ["order"],
     }),

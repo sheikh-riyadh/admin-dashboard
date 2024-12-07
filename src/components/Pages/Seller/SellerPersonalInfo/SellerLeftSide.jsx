@@ -5,9 +5,11 @@ import Button from "../../../Common/Button";
 import SelectInput from "../../../Common/SelectInput";
 import { useUpdateSellerMutation } from "../../../../store/service/seller/sellerApi";
 import toast from "react-hot-toast";
+import { useGetAdmin } from "../../../../hooks/useGetAdmin";
 
 const SellerLeftSide = ({ data, isReport }) => {
   const navigate = useNavigate();
+  const { admin } = useGetAdmin();
 
   const [updateSeller, { isLoading }] = useUpdateSellerMutation();
 
@@ -24,22 +26,22 @@ const SellerLeftSide = ({ data, isReport }) => {
     }
   };
   return (
-    <div className="shadow-md rounded-md overflow-hidden border">
+    <div className="shadow-md rounded-md overflow-hidden">
       {!isReport ? (
-        <div className="flex justify-between bg-white p-5 border-b">
+        <div className="flex justify-between bg-widget p-5 border-b border-[#171f12]">
           <div>
-            <h2 className="capitalize text-2xl font-semibold text-gray-800 ">
+            <h2 className="capitalize text-2xl font-semibold text-white ">
               Personal Info
             </h2>
           </div>
           <div>
-            <Button onClick={() => navigate(-1)} className="px-5">
+            <Button onClick={() => navigate(-1)} className="px-10">
               Back
             </Button>
           </div>
         </div>
       ) : (
-        <div className="bg-white p-5 border-b flex gap-x-4 items-center justify-between">
+        <div className="bg-widget p-5 border-b flex gap-x-4 items-center justify-between text-white">
           <div>
             <p className="font-bold">
               Against To : <span className="font-medium">{data?.fullName}</span>
@@ -52,9 +54,10 @@ const SellerLeftSide = ({ data, isReport }) => {
                 data: {
                   status: e.target.value,
                 },
+                email: admin?.email,
               })
             }
-            className="rounded-full border border-danger text-sm p-0 px-5 py-1 uppercase bg-transparent font-bold"
+            className="bg-[#1C2822] text-white rounded-full px-10 border-danger border"
             disabled={isLoading}
           >
             <option value="" selected disabled>
@@ -69,7 +72,7 @@ const SellerLeftSide = ({ data, isReport }) => {
           </SelectInput>
         </div>
       )}
-      <div className="p-5 bg-white">
+      <div className="p-5 bg-widget">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="w-full rounded-md">
             <CommonComponent name={"Full Name"} value={data?.fullName} />

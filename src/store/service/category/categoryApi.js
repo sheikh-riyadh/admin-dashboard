@@ -3,8 +3,8 @@ import { baseApi } from "../../api/baseApi";
 const categoryApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getCategories: build.query({
-      query: () => ({
-        url: `categories`,
+      query: (data) => ({
+        url: `categories?${data}`,
       }),
       providesTags:["categories"]
     }),
@@ -25,8 +25,8 @@ const categoryApi = baseApi.injectEndpoints({
       invalidatesTags: ["categories"],
     }),
     deleteCategory: build.mutation({
-      query: (id) => ({
-        url: `delete-category/${id}`,
+      query: (data) => ({
+        url: `delete-category?${data}`,
         method:"DELETE"
       }),
       invalidatesTags: ["categories"],

@@ -3,14 +3,14 @@ import { baseApi } from "../../api/baseApi";
 const sellerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllSeller: build.query({
-      query: (status) => ({
-        url: `admin-all-seller?status=${status ? status : ""}`,
+      query: (data) => ({
+        url: `admin-all-seller?${data}`,
       }),
       providesTags: ["admin-seller"],
     }),
     getSellerById: build.query({
-      query: (sellerId) => ({
-        url: `admin-seller-by-id/${sellerId}`,
+      query: (data) => ({
+        url: `admin-seller-by-id?${data}`,
       }),
       providesTags:["admin-seller"]
     }),
@@ -23,8 +23,8 @@ const sellerApi = baseApi.injectEndpoints({
       invalidatesTags: ["admin-seller"],
     }),
     deleteSeller: build.mutation({
-      query: (id) => ({
-        url: `admin-delete-seller/${id}`,
+      query: (data) => ({
+        url: `admin-delete-seller?${data}`,
         method: "DELETE",
       }),
       invalidatesTags: ["admin-seller"],

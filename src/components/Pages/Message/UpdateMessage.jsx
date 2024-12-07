@@ -12,7 +12,7 @@ const UpdateMessage = ({ item }) => {
         onClick={() => {
           setIsModalOpen((prev) => !prev);
         }}
-        className="text-stech cursor-pointer border border-stech text-center p-2 rounded-full"
+        className="text-chart_2 cursor-pointer border border-chart_2 text-center p-2 rounded-full"
         title="Update"
       >
         <FaEdit />
@@ -21,7 +21,7 @@ const UpdateMessage = ({ item }) => {
         {isModalOpen && (
           <Modal
             title={"Update message"}
-            className="w-[500px]"
+            className="w-[350px] xl:w-[500px]"
             onClose={setIsModalOpen}
             isOpen={isModalOpen}
           >

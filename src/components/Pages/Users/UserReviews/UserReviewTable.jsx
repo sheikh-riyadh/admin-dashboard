@@ -5,15 +5,33 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import { FaFutbol, FaStar } from "react-icons/fa";
 import moment from "moment";
 import ReviewView from "./ReviewView";
+import { useState } from "react";
+import { useGetAdmin } from "../../../../hooks/useGetAdmin";
+import Pagination from "../../../Common/Pagination";
 const UserReviewTable = ({ userId }) => {
-  const { data, isLoading } = useProductReviewByUserIdQuery(userId);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const { admin } = useGetAdmin();
+
+  const query = new URLSearchParams({
+    page: currentPage,
+    limit,
+    email: admin?.email,
+    userId,
+  }).toString();
+
+
+  const { data, isLoading } = useProductReviewByUserIdQuery(query);
+  const pages = Math.ceil(Math.abs(data?.total ?? 0) / parseInt(limit));
 
   return (
     <div className="overflow-hidden">
       {!isLoading ? (
-        <Table
+        <div>
+          <Table
           className="font-normal"
-          tableData={data}
+          tableData={data?.data}
           columns={[
             {
               name: "Images",
@@ -46,7 +64,7 @@ const UserReviewTable = ({ userId }) => {
                   <div className="flex gap-1 items-center">
                     {[...Array(item?.rating?.rating).keys()].map((rating) => (
                       <div key={rating}>
-                        <FaStar className="text-stech" />
+                        <FaStar className="text-accent" />
                       </div>
                     ))}
                   </div>
@@ -76,10 +94,18 @@ const UserReviewTable = ({ userId }) => {
             },
           ]}
         />
+        <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            setLimit={setLimit}
+            pages={pages}
+            key={"specific_user_order_pagination"}
+          />
+        </div>
       ) : (
-        <div className="flex flex-col gap-1 items-center justify-center h-screen bg-white">
-          <FaFutbol className="animate-spin text-6xl" />
-          <span>Loading...</span>
+        <div className="flex flex-col gap-1 items-center justify-center h-screen bg-widget">
+          <FaFutbol className="animate-spin text-6xl text-white" />
+          <span className="text-accent">Loading...</span>
         </div>
       )}
     </div>

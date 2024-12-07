@@ -11,17 +11,18 @@ const UserPersonalInfo = ({ data }) => {
     phone: data?.phone,
     status: data?.status,
     role: data?.role,
+    email:data?.email
   };
 
   const userId = data?._id;
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-12 gap-5">
-        <div className="col-span-3">
+      <div className="grid xl:grid-cols-12 gap-5">
+        <div className="xl:col-span-3">
           <UserImage data={data?.photo} />
         </div>
-        <div className="col-span-9">
+        <div className="xl:col-span-9">
           <UserDetailsRight data={newData} />
         </div>
       </div>

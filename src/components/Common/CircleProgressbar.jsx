@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
 import cn from "../../utils/cn";
 
-const CircleProgressbar = ({ data, color = "#081621", className, title }) => {
+const CircleProgressbar = ({ data, color = "#047857", className, title }) => {
   const [percentage, setPercentage] = useState(0);
   const [number, setNumber] = useState(0);
   const circleRef = useRef(null);
@@ -30,7 +30,7 @@ const CircleProgressbar = ({ data, color = "#081621", className, title }) => {
   }, [data]);
 
   return (
-    <div className="flex bg-white items-center flex-col">
+    <div className="flex bg-widget items-center flex-col">
       <div
         ref={circleRef}
         className={cn(
@@ -38,7 +38,7 @@ const CircleProgressbar = ({ data, color = "#081621", className, title }) => {
           className
         )}
       >
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-white">
           <span className="progress-value relative font-bold text-4xl">{number}</span>
           <span className="progress-value relative font-medium text-sm">{title}</span>
         </div>

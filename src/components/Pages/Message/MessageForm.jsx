@@ -10,9 +10,12 @@ import {
 } from "../../../store/service/adminMessage/adminMessageApi";
 import toast from "react-hot-toast";
 import SelectInput from "../../Common/SelectInput";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
 const MessageForm = ({ updateMessage, setIsModalOpen }) => {
   const { handleSubmit, register, setValue } = useForm();
+
+  const { admin } = useGetAdmin();
 
   const [updateAdminMessage, { isLoading: updateLoading }] =
     useUpdateAdminMessageMutation();
@@ -25,6 +28,7 @@ const MessageForm = ({ updateMessage, setIsModalOpen }) => {
         const res = await updateAdminMessage({
           _id: updateMessage?._id,
           data: data,
+          email: admin?.email,
         });
         if (!res?.error) {
           toast.success("Updated message successfully");
@@ -37,7 +41,7 @@ const MessageForm = ({ updateMessage, setIsModalOpen }) => {
       }
     } else {
       try {
-        const res = await createAdminMessage(data);
+        const res = await createAdminMessage({ data, email: admin?.email });
         if (!res?.error) {
           toast.success("Created message successfully");
           setIsModalOpen(false);
@@ -70,6 +74,7 @@ const MessageForm = ({ updateMessage, setIsModalOpen }) => {
           {...register("to")}
           required
           defaultValue={"user"}
+          className="bg-[#1C2822] text-white rounded-sm"
         >
           <option value="">Select</option>
           <option value="user">User</option>
@@ -81,6 +86,7 @@ const MessageForm = ({ updateMessage, setIsModalOpen }) => {
           label={"Title"}
           placeholder={"Title"}
           required
+          className="bg-[#1C2822] text-white rounded-sm"
         />
 
         <TextArea
@@ -88,6 +94,7 @@ const MessageForm = ({ updateMessage, setIsModalOpen }) => {
           label={"Message"}
           placeholder={"Message"}
           required
+          className="bg-[#1C2822] text-white rounded-sm"
         />
         <SubmitButton
           isLoading={createLoading || updateLoading}

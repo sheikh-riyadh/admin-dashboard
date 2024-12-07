@@ -18,40 +18,40 @@ const ProductDetails = () => {
   return (
     <div className="flex flex-col gap-5 p-5">
       <div>
-        <div className="p-3 bg-stech text-white font-bold flex items-center justify-between">
+        <div className="p-3 bg-chart_2 text-white font-bold flex items-center justify-between rounded-t-md">
           <span>Basic information</span>
-          <Button onClick={() => navigate(-1)} className="w-32">
+          <Button onClick={() => navigate(-1)} className="w-32 border rounded-full">
             Back
           </Button>
         </div>
         <ProductBasicInfo data={data} />
       </div>
       <div>
-        <div className="p-3 bg-stech text-white font-bold">
+        <div className="p-3 bg-chart_2 text-white font-bold rounded-t-md">
           <span>Description information</span>
         </div>
         <Description data={data} />
       </div>
       <div>
-        <div className="p-3 bg-stech text-white font-bold">
+        <div className="p-3 bg-chart_2 text-white font-bold rounded-t-md">
           <span>Stock Price and Quantity information</span>
         </div>
         <StockPriceAndQuantity data={data} />
       </div>
       <div>
-        <div className="p-3 bg-stech text-white font-bold">
+        <div className="p-3 bg-chart_2 text-white font-bold rounded-t-md">
           <span>Delivery information</span>
         </div>
         <DeliveryInfo data={data} />
       </div>
       <div>
-        <div className="p-3 bg-stech text-white font-bold">
+        <div className="p-3 bg-chart_2 text-white font-bold rounded-t-md">
           <span>Questions information</span>
         </div>
         <QuestionInfo productId={data?._id} />
       </div>
       <div>
-        <div className="p-3 bg-stech text-white font-bold">
+        <div className="p-3 bg-chart_2 font-bold text-white rounded-t-md">
           <span>Review information</span>
         </div>
         <ReviewInfo productId={data?._id} />

@@ -2,8 +2,10 @@ import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import { useUpdateUserStatusMutation } from "../../../../store/service/users/userApi";
 import SelectInput from "../../../Common/SelectInput";
+import { useGetAdmin } from "../../../../hooks/useGetAdmin";
 
 const UpdateUserStatus = ({ item }) => {
+  const { admin } = useGetAdmin();
   const [updateUserStatus, { isLoading }] = useUpdateUserStatusMutation();
 
   const handleUpdateSeller = async (updatedData) => {
@@ -27,11 +29,12 @@ const UpdateUserStatus = ({ item }) => {
           data: {
             status: e.target.value,
           },
+          email: admin?.email,
         })
       }
       disabled={isLoading}
       value={item?.status}
-      className="border bg-transparent rounded-full p-1 px-2 capitalize"
+      className="bg-[#1C2822] text-white rounded-full"
     >
       <option value="active">Active</option>
       <option value="pending">Pending</option>

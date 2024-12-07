@@ -15,7 +15,7 @@ const DeleteModal = ({
   const handleDelete = async () => {
     try {
       const result = await handleDeleteFunction(deleteId);
-      
+
       if (result.error) {
         toast.error(result?.error?.data?.message, { id: "delete_error" });
       } else {
@@ -36,7 +36,7 @@ const DeleteModal = ({
       >
         <div className="flex flex-col items-center justify-center gap-5 w-full">
           <div className="flex flex-col gap-5 items-center justify-center">
-            <FaQuestionCircle className="text-7xl text-orange-400" />
+            <FaQuestionCircle className="text-7xl text-accent" />
             <h1 className="text-lg text-center font-bold">
               Are your sure you want to delete?
             </h1>
@@ -53,7 +53,6 @@ const DeleteModal = ({
               onClick={handleDelete}
               isLoading={isLoading}
               loadingText="Deleting..."
-              className="bg-stech"
             >
               Sure
             </SubmitButton>

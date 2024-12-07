@@ -3,8 +3,16 @@ import { useDeleteCategoryMutation } from "../../../store/service/category/categ
 import { FaTrash } from "react-icons/fa";
 import DeleteModal from "../../Modal/DeleteModal";
 import PropTypes from "prop-types";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
 const DeleteCategory = ({ deleteId }) => {
+  const { admin } = useGetAdmin();
+
+  const query = new URLSearchParams({
+    id: deleteId,
+    email: admin?.email,
+  }).toString();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteCategory, { isLoading }] = useDeleteCategoryMutation();
 
@@ -19,7 +27,7 @@ const DeleteCategory = ({ deleteId }) => {
       </span>
       <div>
         <DeleteModal
-          deleteId={deleteId}
+          deleteId={query}
           handleDeleteFunction={deleteCategory}
           isLoading={isLoading}
           isModalOpen={isModalOpen}

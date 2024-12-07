@@ -4,15 +4,22 @@ import { useDeleteSellerMutation } from "../../../../store/service/seller/seller
 import Button from "../../../Common/Button";
 import SubmitButton from "../../../Common/SubmitButton";
 import toast from "react-hot-toast";
+import { useGetAdmin } from "../../../../hooks/useGetAdmin";
 
 const DeleteSeller = ({ setIsModalOpen, sellerId }) => {
   const [deleteSeller, { isLoading: deleteLoading }] =
     useDeleteSellerMutation();
 
+  const { admin } = useGetAdmin();
+  const query = new URLSearchParams({
+    id: sellerId,
+    email: admin?.email,
+  }).toString();
+  
   const handleSellerDelete = async () => {
     try {
-      const result = await deleteSeller(sellerId);
-      if(!result?.error){
+      const result = await deleteSeller(query);
+      if (!result?.error) {
         setIsModalOpen((prev) => !prev);
       }
     } catch (error) {

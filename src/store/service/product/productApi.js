@@ -3,14 +3,14 @@ import { baseApi } from "../../api/baseApi";
 const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     sellerProduct: build.query({
-      query: () => ({
-        url: "seller-products",
+      query: (data) => ({
+        url: `seller-products?${data}`,
       }),
       providesTags: ["products"],
     }),
     productBySellerId: build.query({
-      query: (sellerId) => ({
-        url: `seller-product-by-id/${sellerId}`,
+      query: (data) => ({
+        url: `seller-product-by-id?${data}`,
       }),
       providesTags: ["products"],
     }),

@@ -3,8 +3,8 @@ import Input from "../../Common/Input";
 
 const ProductBasicInfo = ({ data }) => {
   return (
-    <div className="flex flex-col gap-1 p-5 bg-white border shadow-md rounded-b-md">
-      <span className="py-2 block font-medium text-sm">Product Image:</span>
+    <div className="flex flex-col gap-1 p-5 bg-widget shadow-md rounded-b-md">
+      <span className="py-2 block font-medium text-sm text-white">Product Image:</span>
       <div>
         <div className="grid grid-cols-4 gap-5">
           {data?.productImages?.map((image) => (
@@ -17,7 +17,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Video URL"}
-          className={"bg-white border px-5"}
+          className={"bg-[#1C2822] text-white rounded-sm"}
           value={data?.videoURL ? data?.videoURL : "N/A"}
           disabled
         />
@@ -25,7 +25,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Title"}
-          className={"bg-white border px-5"}
+          className={"bg-[#1C2822] text-white rounded-sm"}
           value={data?.title}
           disabled
         />
@@ -34,7 +34,7 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Category"}
-          className={"bg-white border px-5"}
+          className={"bg-[#1C2822] text-white rounded-sm"}
           value={data?.category}
           disabled
         />
@@ -42,19 +42,19 @@ const ProductBasicInfo = ({ data }) => {
       <div>
         <Input
           label={"Brand"}
-          className={"bg-white border px-5"}
+          className={"bg-[#1C2822] text-white rounded-sm"}
           value={data?.brand}
           disabled
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="py-2 block font-medium text-sm">Key Features</span>
+        <span className="py-2 block font-medium text-sm text-white">Key Features</span>
         <div className="flex items-center gap-2 flex-wrap">
           {data?.keyFeatures?.map((feature) => (
             <div
               key={feature}
-              className="px-2 flex items-center gap-2 border rounded-md bg-stech text-white"
+              className="px-2 flex items-center gap-2 rounded-full bg-accent font-bold"
             >
               <span className="text-sm">{feature}</span>
             </div>

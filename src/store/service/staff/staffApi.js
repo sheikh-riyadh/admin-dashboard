@@ -22,7 +22,6 @@ const sellerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["admin-staff"],
     }),
-
     updateStaff: build.mutation({
       query: (data) => ({
         url: "admin-update-staff",
@@ -31,10 +30,9 @@ const sellerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["admin-staff"],
     }),
-
     deleteStaff: build.mutation({
-      query: (id) => ({
-        url: `admin-delete-staff/${id}`,
+      query: (data) => ({
+        url: `admin-delete-staff?${data}`,
         method: "DELETE",
       }),
       invalidatesTags: ["admin-staff"],

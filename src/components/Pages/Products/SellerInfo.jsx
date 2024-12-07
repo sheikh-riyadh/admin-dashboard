@@ -3,8 +3,14 @@ import SellerLeftSide from "../Seller/SellerPersonalInfo/SellerLeftSide";
 import SellerImage from "../Seller/SellerPersonalInfo/SellerImage";
 import { useGetSellerByIdQuery } from "../../../store/service/seller/sellerApi";
 import BusinessInfo from "../Seller/BusinessInfo/BusinessInfo";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 const SellerInfo = ({ data }) => {
-  const { data: sellerData } = useGetSellerByIdQuery(data?.sellerId);
+  const { admin } = useGetAdmin();
+  const query = new URLSearchParams({
+    sellerId: data?.sellerId,
+    email: admin?.email,
+  }).toString();
+  const { data: sellerData } = useGetSellerByIdQuery(query);
 
   return (
     <div className="flex flex-col gap-5">

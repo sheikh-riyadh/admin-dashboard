@@ -2,14 +2,16 @@ import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import SelectInput from "../../Common/SelectInput";
 import { useUpdateProductStatusMutation } from "../../../store/service/product/productApi";
+import { useGetAdmin } from "../../../hooks/useGetAdmin";
 
-const UpdateStatus = ({item }) => {
+const UpdateStatus = ({ item }) => {
   const [updateProduct, { isLoading }] = useUpdateProductStatusMutation();
-
+  const { admin } = useGetAdmin();
   const handleUpdateStatus = async (event) => {
     const data = {
       _id: item?._id,
       data: { status: event.target.value },
+      email: admin?.email,
     };
     try {
       const res = await updateProduct(data);
@@ -26,7 +28,7 @@ const UpdateStatus = ({item }) => {
     <div>
       <SelectInput
         onChange={handleUpdateStatus}
-        className="border bg-transparent rounded-full p-0 px-2 capitalize"
+        className="bg-[#1C2822] text-white rounded-full"
         disabled={isLoading}
       >
         <option selected={item?.status === "active"} value="active">
