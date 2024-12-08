@@ -5,11 +5,16 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import { numberWithCommas } from "../../../../utils/numberWithComma";
 import View from "../../Orders/View";
 import { FaFutbol } from "react-icons/fa";
+import { useGetAdmin } from "../../../../hooks/useGetAdmin";
 
 const UserCancelOrderTable = ({ userId }) => {
+const {admin}=useGetAdmin()
+
+
   const query = new URLSearchParams({
     userId,
     status: "cancelled",
+    email:admin?.email
   });
 
   const { data, isLoading } = useCancelOrderByUserIdQuery(query.toString());
