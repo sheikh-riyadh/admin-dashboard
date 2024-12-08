@@ -69,11 +69,13 @@ const Login = () => {
                 type="email"
                 required
                 className="w-full"
+                defaultValue="sheikhriyadh934@gmail.com"
               />
               <Input
                 {...register("password")}
                 placeholder="*******"
                 type="password"
+                defaultValue="admin@riyadh12345!"
                 required
               />
             </div>
