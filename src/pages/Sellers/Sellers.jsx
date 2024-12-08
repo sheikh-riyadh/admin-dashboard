@@ -29,7 +29,7 @@ const Sellers = () => {
           <div className="flex items-center gap-3 justify-end mt-5 xl:mt-0">
             <Input
             onChange={handleChange}
-              placeholder="Search not available"
+              placeholder="Search..."
               className="bg-white w-full"
             />
             <Button className="w-40">Find seller</Button>

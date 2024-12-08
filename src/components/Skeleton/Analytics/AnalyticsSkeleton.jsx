@@ -1,5 +1,5 @@
 const Skeleton = () => (
-  <div className={`animate-pulse bg-gray-300`} />
+  <div className={`animate-pulse bg-widget`} />
 );
 
 const AnalyticsSkeleton = () => {
@@ -10,7 +10,7 @@ const AnalyticsSkeleton = () => {
         {Array.from({ length: 4 }).map((_, idx) => (
           <div
             key={idx}
-            className="bg-gray-100 rounded-md shadow-md p-5 flex flex-col gap-3"
+            className="bg-widget rounded-md shadow-md p-5 flex flex-col gap-3"
           >
             <Skeleton className="h-10 w-10 rounded-full" />
             <Skeleton className="h-6 w-3/4" />
@@ -23,7 +23,7 @@ const AnalyticsSkeleton = () => {
       <div className="mb-10 gap-5 h-full">
         <div className="grid grid-cols-12 gap-5">
           {/* Skeleton for graph section */}
-          <div className="col-span-9 bg-gray-100 rounded-md shadow-md h-screen">
+          <div className="col-span-9 bg-widget rounded-md shadow-md h-screen">
             <Skeleton className="h-64 w-full" />
           </div>
 
@@ -32,7 +32,7 @@ const AnalyticsSkeleton = () => {
             {Array.from({ length: 2 }).map((_, idx) => (
               <div
                 key={idx}
-                className="bg-gray-100 rounded-md shadow-md flex flex-col items-center justify-center p-5"
+                className="bg-widget rounded-md shadow-md flex flex-col items-center justify-center p-5"
               >
                 <Skeleton className="h-24 w-24 rounded-full" />
                 <Skeleton className="h-6 w-1/2 mt-3" />
