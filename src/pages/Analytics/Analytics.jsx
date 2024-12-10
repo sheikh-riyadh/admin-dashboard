@@ -14,7 +14,7 @@ import AnalyticsSkeleton from "../../components/Skeleton/Analytics/AnalyticsSkel
 const Analytics = () => {
   const { admin } = useGetAdmin();
   const query = new URLSearchParams({
-    status: null,
+    status:"",
     search: "",
     limit: 2,
     page: 0,
@@ -67,6 +67,8 @@ const Analytics = () => {
     }
     return total;
   }, 0);
+
+  console.log({userData, sellerData})
 
   return (
     <>
