@@ -14,7 +14,7 @@ import AnalyticsSkeleton from "../../components/Skeleton/Analytics/AnalyticsSkel
 const Analytics = () => {
   const { admin } = useGetAdmin();
   const query = new URLSearchParams({
-    status: "active",
+    status: null,
     search: "",
     limit: 2,
     page: 0,
@@ -92,7 +92,9 @@ const Analytics = () => {
                 />
               </div>
               <div className="xl:col-span-3 grid md:grid-cols-2 xl:grid-cols-1 gap-5">
-                <div className={`bg-widget rounded-md shadow-md flex flex-col items-center justify-center p-5`}>
+                <div
+                  className={`bg-widget rounded-md shadow-md flex flex-col items-center justify-center p-5`}
+                >
                   <CircleProgressbar
                     title={"New seller"}
                     data={newSeller ? newSeller : 0}

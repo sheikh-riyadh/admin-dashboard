@@ -12,9 +12,9 @@ const Sellers = () => {
     <div>
       <div className="p-5 flex flex-col gap-5">
         <div className="grid xl:grid-cols-2">
-          <div className="grid grid-cols-4 items-center gap-5">
+          <div className="grid xl:grid-cols-5 items-center gap-5">
             <span className="font-bold text-xl text-white">All Seller</span>
-            {["active", "pending", "blocked"].map((statusItem) => (
+            {["active", "pending", "blocked","working"].map((statusItem) => (
               <Button
                 onClick={() => setStatus(statusItem)}
                 key={statusItem}

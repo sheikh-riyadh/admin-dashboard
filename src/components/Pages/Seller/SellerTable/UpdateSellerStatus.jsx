@@ -39,6 +39,7 @@ const UpdateSellerStatus = ({ item }) => {
       className="bg-[#1C2822] text-white rounded-full"
     >
       <option value="active">Active</option>
+      <option value="working">Working</option>
       <option value="pending">Pending</option>
       <option value="blocked">Block</option>
     </SelectInput>
